@@ -10,7 +10,10 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  flame: ^1.0.0-releasecandidate.16
+  flame:
+    path: ../flame/packages/flame/
+  flame_oxygen:
+    path: ../flame/packages/flame_oxygen/
 
 dev_dependencies:
   flutter_test:
@@ -21,3 +24,6 @@ flutter:
   uses-material-design: true
 
   # To add assets, see: https://docs.flame-engine.org/main/structure.html
+  assets:
+    - assets/images/pizza.png
+    - assets/images/chopper.png

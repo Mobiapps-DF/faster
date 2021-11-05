@@ -60,10 +60,17 @@ packages:
   flame:
     dependency: "direct main"
     description:
-      name: flame
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "../flame/packages/flame"
+      relative: true
+    source: path
     version: "1.0.0-releasecandidate.16"
+  flame_oxygen:
+    dependency: "direct main"
+    description:
+      path: "../flame/packages/flame_oxygen"
+      relative: true
+    source: path
+    version: "0.1.0-releasecandidate.13"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -109,6 +116,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0"
+  oxygen:
+    dependency: transitive
+    description:
+      name: oxygen
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
   path:
     dependency: transitive
     description:
@@ -178,5 +192,5 @@ packages:
     source: hosted
     version: "2.1.0"
 sdks:
-  dart: ">=2.12.0 <3.0.0"
+  dart: ">=2.14.0 <3.0.0"
   flutter: ">=2.5.0"
