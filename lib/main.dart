@@ -1,5 +1,5 @@
 import 'package:faster/components/velocity_component.dart';
-import 'package:faster/systems/move_system.dart';
+import 'package:faster/systems/jump_system.dart';
 import 'package:faster/systems/sprite_system.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
@@ -20,7 +20,7 @@ class FasterGame extends OxygenGame {
   Future<void> init() async {
     await Flame.device.fullScreen();
     await Flame.device.setLandscape();
-    world.registerSystem(MoveSystem());
+    world.registerSystem(JumpSystem());
     world.registerSystem(SpriteSystem());
 
     world.registerComponent<VelocityComponent, Vector2>(
@@ -29,14 +29,14 @@ class FasterGame extends OxygenGame {
 
     createEntity(
       name: 'Player',
-      position: Vector2(10, 0),
+      position: Vector2(50, 0),
       size: Vector2.all(64),
     )
       ..add<SpriteComponent, SpriteInit>(
         SpriteInit(await loadSprite('character.png'))
       )
       ..add<VelocityComponent, Vector2>(
-        Vector2(0, 80), 
+        Vector2(0, 150), 
       );
   }
 }
