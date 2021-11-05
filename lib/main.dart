@@ -1,6 +1,7 @@
 import 'package:faster/components/velocity_component.dart';
 import 'package:faster/systems/move_system.dart';
 import 'package:faster/systems/sprite_system.dart';
+import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flame_oxygen/flame_oxygen.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,8 @@ class FasterGame extends OxygenGame {
 
   @override
   Future<void> init() async {
+    await Flame.device.fullScreen();
+    await Flame.device.setLandscape();
     world.registerSystem(MoveSystem());
     world.registerSystem(SpriteSystem());
 
