@@ -1,11 +1,7 @@
+import 'package:faster/components/velocity_component.dart';
 import 'package:faster/main.dart';
 import 'package:flame/extensions.dart';
-import 'package:flame/game.dart';
 import 'package:flame_oxygen/flame_oxygen.dart';
-import 'package:flutter/material.dart';
-
-import '../components/timer_component.dart';
-import '../components/velocity_component.dart';
 
 class MoveSystem extends System with UpdateSystem, GameRef<FasterGame> {
   Query? _query;
@@ -15,6 +11,8 @@ class MoveSystem extends System with UpdateSystem, GameRef<FasterGame> {
     _query = createQuery([
       Has<PositionComponent>(),
       Has<VelocityComponent>(),
+      Has<SpriteComponent>(),
+      // TODO: InputComponent (?)
     ]);
   }
 
@@ -27,8 +25,8 @@ class MoveSystem extends System with UpdateSystem, GameRef<FasterGame> {
   @override
   void update(double delta) {
     for (final entity in _query?.entities ?? <Entity>[]) {
-      final velocity = entity.get<VelocityComponent>()!.velocity;
       final size = entity.get<SizeComponent>()!.size;
+      final velocity = entity.get<VelocityComponent>()!.velocity;
       final position = entity.get<PositionComponent>()!.position
         ..add(velocity * delta);
 
@@ -36,20 +34,6 @@ class MoveSystem extends System with UpdateSystem, GameRef<FasterGame> {
       if (!screenSize.containsPoint(position) ||
           !screenSize.containsPoint(position + size)) {
         velocity.setFrom(-velocity);
-
-        game!.createEntity(
-          name: '${entity.name} says',
-          position: position + size / 2,
-          size: Vector2.zero(),
-          anchor: Anchor.topCenter,
-        )
-          ..add<TextComponent, TextInit>(
-            TextInit(
-              'Kawabunga',
-              config: const TextPaintConfig(color: Colors.blue, fontSize: 12),
-            ),
-          )
-          ..add<TimerComponent, double>(3);
       }
     }
   }

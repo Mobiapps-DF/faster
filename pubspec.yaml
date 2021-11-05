@@ -25,5 +25,4 @@ flutter:
 
   # To add assets, see: https://docs.flame-engine.org/main/structure.html
   assets:
-    - assets/images/pizza.png
-    - assets/images/chopper.png
+    - assets/images/character.png
