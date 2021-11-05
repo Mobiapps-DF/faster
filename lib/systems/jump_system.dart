@@ -1,3 +1,4 @@
+import 'package:faster/components/tap_input_component.dart';
 import 'package:faster/components/velocity_component.dart';
 import 'package:faster/main.dart';
 import 'package:flame/extensions.dart';
@@ -13,7 +14,7 @@ class JumpSystem extends System with UpdateSystem, GameRef<FasterGame> {
       Has<PositionComponent>(),
       Has<VelocityComponent>(),
       Has<SpriteComponent>(),
-      // TODO: InputComponent (?)
+      Has<TapInputComponent>(),
     ]);
   }
 
@@ -26,17 +27,21 @@ class JumpSystem extends System with UpdateSystem, GameRef<FasterGame> {
   @override
   void update(double delta) {
     for (final entity in _query?.entities ?? <Entity>[]) {
-      // https://gamedev.stackexchange.com/questions/15708/how-can-i-implement-gravity
-      final velocity = entity.get<VelocityComponent>()!.velocity;
-      final position = entity.get<PositionComponent>()!.position
-        ..add((velocity + (_gravity * delta / 2)) * delta);
-      velocity.add(_gravity * delta);
+      final isTapped = entity.get<TapInputComponent>()!.value!;
+      
+      if (isTapped) {
+        // https://gamedev.stackexchange.com/questions/15708/how-can-i-implement-gravity
+        final velocity = entity.get<VelocityComponent>()!.velocity;
+        final position = entity.get<PositionComponent>()!.position
+          ..add((velocity + (_gravity * delta / 2)) * delta);
+        velocity.add(_gravity * delta);
 
-      final screenSize = Vector2.zero() & game!.size;
-      final size = entity.get<SizeComponent>()!.size;
-      if (!screenSize.containsPoint(position) ||
-          !screenSize.containsPoint(position + size)) {
-        velocity.setFrom(-velocity);
+        final screenSize = Vector2.zero() & game!.size;
+        final size = entity.get<SizeComponent>()!.size;
+        if (!screenSize.containsPoint(position) ||
+            !screenSize.containsPoint(position + size)) {
+          velocity.setFrom(-velocity);
+        }
       }
     }
   }
