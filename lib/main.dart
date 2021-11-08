@@ -35,7 +35,7 @@ class FasterGame extends OxygenGame with TapDetector {
 
     createEntity(
       name: 'Player',
-      position: Vector2(50, 0),
+      position: Vector2(50, world.game.size.y - 100),
       size: Vector2.all(64),
     )
       ..add<SpriteComponent, SpriteInit>(

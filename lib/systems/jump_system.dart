@@ -6,6 +6,7 @@ import 'package:flame_oxygen/flame_oxygen.dart';
 
 class JumpSystem extends System with UpdateSystem, GameRef<FasterGame> {
   final _gravity = Vector2(0, 400);
+  final _jumpForce = Vector2(0, -400);
   Query? _query;
 
   @override
@@ -26,21 +27,27 @@ class JumpSystem extends System with UpdateSystem, GameRef<FasterGame> {
 
   @override
   void update(double delta) {
+    // https://gamedev.stackexchange.com/questions/15708/how-can-i-implement-gravity
     for (final entity in _query?.entities ?? <Entity>[]) {
       final isTapped = entity.get<TapInputComponent>()!.value!;
+      final velocity = entity.get<VelocityComponent>()!.velocity;
+      final position = entity.get<PositionComponent>()!.position;
+      final screenSize = game!.size;
+      final size = entity.get<SizeComponent>()!.size;
       
       if (isTapped) {
-        // https://gamedev.stackexchange.com/questions/15708/how-can-i-implement-gravity
-        final velocity = entity.get<VelocityComponent>()!.velocity;
-        final position = entity.get<PositionComponent>()!.position
-          ..add((velocity + (_gravity * delta / 2)) * delta);
-        velocity.add(_gravity * delta);
-
-        final screenSize = Vector2.zero() & game!.size;
-        final size = entity.get<SizeComponent>()!.size;
-        if (!screenSize.containsPoint(position) ||
-            !screenSize.containsPoint(position + size)) {
-          velocity.setFrom(-velocity);
+        if (position.y >= 0) {
+          position.add((velocity + (_jumpForce * delta / 2)) * delta);
+          velocity.add(_jumpForce * delta);
+        } else {
+          entity.get<VelocityComponent>()!.reset();
+        }
+      } else {
+        if (position.y + size.y <= screenSize.y) {
+          position.add((velocity + (_gravity * delta / 2)) * delta);
+          velocity.add(_gravity * delta);
+        } else {
+          entity.get<VelocityComponent>()!.reset();
         }
       }
     }
