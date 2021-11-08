@@ -5,8 +5,9 @@ import 'package:flame/extensions.dart';
 import 'package:flame_oxygen/flame_oxygen.dart';
 
 class JumpSystem extends System with UpdateSystem, GameRef<FasterGame> {
-  final _gravity = Vector2(0, 400);
-  final _jumpForce = Vector2(0, -400);
+  final _gravity = Vector2(0, 2000);
+  final _jumpForce = Vector2(0, -2000);
+  bool _lastTappedState = false;
   Query? _query;
 
   @override
@@ -34,6 +35,11 @@ class JumpSystem extends System with UpdateSystem, GameRef<FasterGame> {
       final position = entity.get<PositionComponent>()!.position;
       final screenSize = game!.size;
       final size = entity.get<SizeComponent>()!.size;
+
+      if (isTapped != _lastTappedState) {
+        entity.get<VelocityComponent>()!.reset();
+        _lastTappedState = isTapped;
+      }
       
       if (isTapped) {
         if (position.y >= 0) {
