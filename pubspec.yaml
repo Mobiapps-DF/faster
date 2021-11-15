@@ -23,4 +23,5 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-  # To add assets, see: https://docs.flame-engine.org/main/structure.html
+  assets:
+    - assets/images/
