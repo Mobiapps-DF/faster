@@ -43,13 +43,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.15.0"
-  cupertino_icons:
-    dependency: "direct main"
-    description:
-      name: cupertino_icons
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.3"
   fake_async:
     dependency: transitive
     description:
@@ -60,14 +53,14 @@ packages:
   flame:
     dependency: "direct main"
     description:
-      path: "../flame/packages/flame"
+      path: "dependencies/flame/packages/flame"
       relative: true
     source: path
     version: "1.0.0-releasecandidate.16"
   flame_oxygen:
     dependency: "direct main"
     description:
-      path: "../flame/packages/flame_oxygen"
+      path: "dependencies/flame/packages/flame_oxygen"
       relative: true
     source: path
     version: "0.1.0-releasecandidate.13"

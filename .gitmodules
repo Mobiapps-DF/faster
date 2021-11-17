@@ -1,0 +1,3 @@
+[submodule "dependencies/flame"]
+	path = dependencies/flame
+	url = git@github.com:flame-engine/flame.git

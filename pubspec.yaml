@@ -9,16 +9,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
   flame:
-    path: ../flame/packages/flame/
+    path: dependencies/flame/packages/flame/
   flame_oxygen:
-    path: ../flame/packages/flame_oxygen/
+    path: dependencies/flame/packages/flame_oxygen/
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.0
+  flutter_lints: ^1.0.4
 
 flutter:
   uses-material-design: true
