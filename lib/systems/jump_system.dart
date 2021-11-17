@@ -1,6 +1,6 @@
 import 'package:faster/components/tap_input_component.dart';
 import 'package:faster/components/velocity_component.dart';
-import 'package:faster/main.dart';
+import 'package:faster/faster_game.dart';
 import 'package:flame/extensions.dart';
 import 'package:flame_oxygen/flame_oxygen.dart';
 
