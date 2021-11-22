@@ -3,7 +3,7 @@ import 'package:faster/components/parallax_component.dart';
 import 'package:faster/components/tap_input_component.dart';
 import 'package:faster/components/velocity_component.dart';
 import 'package:faster/entities/background_entity.dart';
-import 'package:faster/entities/difficulty_entity.dart';
+import 'package:faster/entities/game_session_entity.dart';
 import 'package:faster/entities/player_entity.dart';
 import 'package:faster/systems/background_system.dart';
 import 'package:faster/systems/difficulty_system.dart';
@@ -33,7 +33,7 @@ class FasterGame extends OxygenGame with TapDetector {
 
     await createPlayer(this);
     await createBackground(this);
-    createDifficulty(this);
+    createGameSession(this);
   }
 
   @override
