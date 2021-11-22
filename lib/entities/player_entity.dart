@@ -4,8 +4,10 @@ import 'package:faster/faster_game.dart';
 import 'package:flame/game.dart';
 import 'package:flame_oxygen/flame_oxygen.dart';
 
+const playerEntity = 'Player';
+
 Future<Entity> createPlayer(FasterGame game) async => game.createEntity(
-      name: 'Player',
+      name: playerEntity,
       position: Vector2(50, game.world.game.size.y - 100),
       size: Vector2.all(64),
     )

@@ -8,7 +8,7 @@ class VelocityComponent extends Component<Vector2> {
   set velocity(Vector2 position) => _velocity.setFrom(position);
 
   @override
-  void init([Vector2? velocity]) => _velocity = velocity ?? Vector2.zero();
+  void init([Vector2? data]) => _velocity = data ?? Vector2.zero();
 
   @override
   void reset() => _velocity.setZero();

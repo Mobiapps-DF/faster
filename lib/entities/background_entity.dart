@@ -7,6 +7,8 @@ import 'package:flame_oxygen/flame_oxygen.dart';
 
 const baseSpeed = 10.0;
 
+const backgroundEntity = 'Background';
+
 Future<Entity> createBackground(FasterGame game) async {
   var parallax = await game.loadParallax(
     [ParallaxImageData('background.png'), ParallaxImageData('groundGrass.png')],
@@ -14,8 +16,10 @@ Future<Entity> createBackground(FasterGame game) async {
     velocityMultiplierDelta: Vector2(1.8, 1.0),
   );
 
+  parallax.resize(game.size);
+
   return game.createEntity(
-    name: 'Background',
+    name: backgroundEntity,
     position: Vector2(0, 0),
     size: game.size,
   )
