@@ -1,3 +1,4 @@
+import 'package:faster/components/animated_sprite_component.dart';
 import 'package:faster/components/tap_input_component.dart';
 import 'package:faster/components/velocity_component.dart';
 import 'package:faster/faster_game.dart';
@@ -15,7 +16,7 @@ class JumpSystem extends System with UpdateSystem, GameRef<FasterGame> {
     _query = createQuery([
       Has<PositionComponent>(),
       Has<VelocityComponent>(),
-      Has<SpriteComponent>(),
+      Has<AnimatedSpriteComponent>(),
       Has<TapInputComponent>(),
     ]);
   }
