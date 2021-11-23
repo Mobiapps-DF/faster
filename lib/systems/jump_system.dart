@@ -1,4 +1,4 @@
-import 'package:faster/components/animated_sprite_component.dart';
+import 'package:faster/components/animated_sprites_component.dart';
 import 'package:faster/components/tap_input_component.dart';
 import 'package:faster/components/velocity_component.dart';
 import 'package:faster/faster_game.dart';
@@ -16,7 +16,7 @@ class JumpSystem extends System with UpdateSystem, GameRef<FasterGame> {
     _query = createQuery([
       Has<PositionComponent>(),
       Has<VelocityComponent>(),
-      Has<AnimatedSpriteComponent>(),
+      Has<AnimatedSpritesComponent>(),
       Has<TapInputComponent>(),
     ]);
   }
@@ -36,6 +36,7 @@ class JumpSystem extends System with UpdateSystem, GameRef<FasterGame> {
       final position = entity.get<PositionComponent>()!.position;
       final screenSize = game!.size;
       final size = entity.get<SizeComponent>()!.size;
+      final animatedSprites = entity.get<AnimatedSpritesComponent>()!;
 
       if (isTapped != _lastTappedState) {
         entity.get<VelocityComponent>()!.reset();
@@ -43,6 +44,7 @@ class JumpSystem extends System with UpdateSystem, GameRef<FasterGame> {
       }
       
       if (isTapped) {
+        animatedSprites.activeAnimation = 1;
         if (position.y >= 0) {
           position.add((velocity + (_jumpForce * delta / 2)) * delta);
           velocity.add(_jumpForce * delta);
@@ -50,6 +52,7 @@ class JumpSystem extends System with UpdateSystem, GameRef<FasterGame> {
           entity.get<VelocityComponent>()!.reset();
         }
       } else {
+        animatedSprites.activeAnimation = 0;
         if (position.y + size.y <= screenSize.y) {
           position.add((velocity + (_gravity * delta / 2)) * delta);
           velocity.add(_gravity * delta);

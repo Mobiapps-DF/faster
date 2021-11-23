@@ -1,4 +1,4 @@
-import 'package:faster/components/animated_sprite_component.dart';
+import 'package:faster/components/animated_sprites_component.dart';
 import 'package:faster/components/difficulty_component.dart';
 import 'package:faster/components/parallax_component.dart';
 import 'package:faster/components/tap_input_component.dart';
@@ -33,7 +33,7 @@ class FasterGame extends OxygenGame with TapDetector {
       ..registerComponent<TapInputComponent, bool>(() => TapInputComponent())
       ..registerComponent<ParallaxComponent, Parallax>(() => ParallaxComponent())
       ..registerComponent<DifficultyComponent, int>(() => DifficultyComponent())
-      ..registerComponent<AnimatedSpriteComponent, SpriteAnimation>(() => AnimatedSpriteComponent());
+      ..registerComponent<AnimatedSpritesComponent, List<SpriteAnimation>>(() => AnimatedSpritesComponent());
 
     await createPlayer(this);
     await createBackground(this);
