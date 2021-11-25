@@ -39,6 +39,7 @@ class ObstacleSystem extends System with UpdateSystem, GameRef<FasterGame> {
         position.add((velocity * delta));
       } else {
         // TODO : Destroy the obstacle
+        // comme ca : entity.dispose();
       }
     }
   }
