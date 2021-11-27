@@ -12,7 +12,7 @@ class BackgroundSystem extends BaseSystem with UpdateSystem, GameRef<FasterGame>
   DifficultyComponent? difficultyComponent;
 
   @override
-  List<Filter<Component>> get filters => [Has<ParallaxComponent>(), Has<DifficultyComponent>()];
+  List<Filter<Component>> get filters => [Has<ParallaxComponent>()];
 
   @override
   void update(double delta) {
