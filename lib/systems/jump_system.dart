@@ -31,7 +31,7 @@ class JumpSystem extends System with UpdateSystem, GameRef<FasterGame> {
   void update(double delta) {
     // https://gamedev.stackexchange.com/questions/15708/how-can-i-implement-gravity
     for (final entity in _query?.entities ?? <Entity>[]) {
-      final isTapped = entity.get<TapInputComponent>()!.value!;
+      final isTapped = entity.get<TapInputComponent>()!.value;
       final velocity = entity.get<VelocityComponent>()!.velocity;
       final position = entity.get<PositionComponent>()!.position;
       final screenSize = game!.size;

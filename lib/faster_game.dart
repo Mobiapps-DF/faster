@@ -41,18 +41,17 @@ class FasterGame extends OxygenGame with TapDetector {
   }
 
   @override
-  bool onTapDown(TapDownInfo info) {
-    final player = world.entityManager.getEntityByName(playerEntity);
-
-    player?.get<TapInputComponent>()!.value = true;
-    return true;
-  }
+  void onTapCancel() => _revertIsTapped();
 
   @override
-  bool onTapUp(TapUpInfo info) {
+  void onTapDown(TapDownInfo info) => _revertIsTapped();
+
+  @override
+  void onTapUp(TapUpInfo info) => _revertIsTapped();
+
+  void _revertIsTapped() {
     final player = world.entityManager.getEntityByName(playerEntity);
 
-    player?.get<TapInputComponent>()!.value = false;
-    return true;
+    player?.get<TapInputComponent>()!.revert();
   }
 }
