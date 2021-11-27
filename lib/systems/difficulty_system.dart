@@ -1,9 +1,11 @@
 import 'package:faster/components/difficulty_component.dart';
+import 'package:faster/faster_game.dart';
+import 'package:faster/utils/game_status_helper.dart';
 import 'package:flame_oxygen/flame_oxygen.dart';
 
 const timeBeforeIncrease = 10;
 
-class DifficultySystem extends System with UpdateSystem {
+class DifficultySystem extends System with UpdateSystem, GameRef<FasterGame> {
   Query? _query;
   double elapsedTime = 0;
 
@@ -20,11 +22,13 @@ class DifficultySystem extends System with UpdateSystem {
 
   @override
   void update(double delta) {
-    elapsedTime += delta;
-    if (elapsedTime > timeBeforeIncrease) {
-      elapsedTime = 0;
-      for (final entity in _query?.entities ?? <Entity>[]) {
-        entity.get<DifficultyComponent>()?.difficulty += 1;
+    if (game != null && isPlaying(game!)) {
+      elapsedTime += delta;
+      if (elapsedTime > timeBeforeIncrease) {
+        elapsedTime = 0;
+        for (final entity in _query?.entities ?? <Entity>[]) {
+          entity.get<DifficultyComponent>()?.difficulty += 1;
+        }
       }
     }
   }

@@ -13,6 +13,7 @@ import 'package:faster/systems/difficulty_system.dart';
 import 'package:faster/systems/game_status_system.dart';
 import 'package:faster/systems/jump_system.dart';
 import 'package:faster/systems/sprite_system.dart';
+import 'package:faster/utils/game_status_helper.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
@@ -46,17 +47,21 @@ class FasterGame extends OxygenGame with TapDetector {
 
   @override
   bool onTapDown(TapDownInfo info) {
-    final player = world.entityManager.getEntityByName(playerEntity);
+    if (isPlaying(this)) {
+      final player = world.entityManager.getEntityByName(playerEntity);
 
-    player?.get<TapInputComponent>()!.value = true;
+      player?.get<TapInputComponent>()!.value = true;
+    }
     return true;
   }
 
   @override
   bool onTapUp(TapUpInfo info) {
-    final player = world.entityManager.getEntityByName(playerEntity);
+    if (isPlaying(this)) {
+      final player = world.entityManager.getEntityByName(playerEntity);
 
-    player?.get<TapInputComponent>()!.value = false;
+      player?.get<TapInputComponent>()!.value = false;
+    }
     return true;
   }
 }

@@ -1,7 +1,6 @@
-import 'package:faster/components/game_status_component.dart';
-import 'package:faster/entities/game_session_entity.dart';
 import 'package:faster/faster_game.dart';
-import 'package:faster/widgets/faster_home.dart';
+import 'package:faster/layers/faster_home.dart';
+import 'package:faster/utils/game_status_helper.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 
@@ -13,10 +12,7 @@ void main() {
         game: FasterGame(),
         overlayBuilderMap: {
           FasterHome.name: (BuildContext context, FasterGame game) {
-            return FasterHome(() {
-              game.world.entityManager.getEntityByName(gameSessionEntity)?.get<GameStatusComponent>()?.status =
-                  GameStatus.playing;
-            });
+            return FasterHome(() => setPlaying(game));
           }
         },
         initialActiveOverlays: [

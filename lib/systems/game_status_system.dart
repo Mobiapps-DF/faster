@@ -1,6 +1,6 @@
 import 'package:faster/components/game_status_component.dart';
 import 'package:faster/faster_game.dart';
-import 'package:faster/widgets/faster_home.dart';
+import 'package:faster/layers/faster_home.dart';
 import 'package:flame_oxygen/flame_oxygen.dart';
 
 class GameStatusSystem extends System with UpdateSystem, GameRef<FasterGame> {
