@@ -5,7 +5,9 @@ import 'package:faster/faster_game.dart';
 import 'package:flame/game.dart';
 import 'package:flame_oxygen/flame_oxygen.dart';
 
-const playerEntity = 'Player';
+const String playerEntity = 'Player';
+const double playerSizeX = 60;
+const double playerSizeY = 80;
 
 Future<Entity> createPlayer(FasterGame game) async {
   final runSprites = [
@@ -19,8 +21,8 @@ Future<Entity> createPlayer(FasterGame game) async {
 
   return game.createEntity(
       name: playerEntity,
-      position: Vector2(50, game.world.game.size.y - 100),
-      size: Vector2.all(64),
+      position: Vector2(50, game.world.game.size.y - playerSizeY),
+      size: Vector2(playerSizeX, playerSizeY),
     )
       // ..add<SpriteComponent, SpriteInit>(SpriteInit(await game.loadSprite('character.png')))
       ..add<AnimatedSpritesComponent, List<SpriteAnimation>>([
@@ -28,7 +30,7 @@ Future<Entity> createPlayer(FasterGame game) async {
           SpriteAnimation.spriteList(jumpSprites, stepTime: 0.15),
         ])
       ..add<VelocityComponent, Vector2>(
-        Vector2(0, 150),
+        Vector2(0, 0),
       )
       ..add<TapInputComponent, bool>(false);
 }

@@ -37,6 +37,7 @@ class JumpSystem extends System with UpdateSystem, GameRef<FasterGame> {
       final screenSize = game!.size;
       final size = entity.get<SizeComponent>()!.size;
       final animatedSprites = entity.get<AnimatedSpritesComponent>()!;
+      Vector2 deltaPosition;
 
       if (isTapped != _lastTappedState) {
         entity.get<VelocityComponent>()!.reset();
@@ -45,16 +46,20 @@ class JumpSystem extends System with UpdateSystem, GameRef<FasterGame> {
       
       if (isTapped) {
         animatedSprites.activeAnimation = 1;
-        if (position.y >= 0) {
-          position.add((velocity + (_jumpForce * delta / 2)) * delta);
+        deltaPosition = (velocity + (_jumpForce * delta / 2)) * delta;
+
+        if (position.y + deltaPosition.y > 0) {
+          position.add(deltaPosition);
           velocity.add(_jumpForce * delta);
         } else {
           entity.get<VelocityComponent>()!.reset();
         }
       } else {
         animatedSprites.activeAnimation = 0;
-        if (position.y + size.y <= screenSize.y) {
-          position.add((velocity + (_gravity * delta / 2)) * delta);
+        deltaPosition = (velocity + (_gravity * delta / 2)) * delta;
+
+        if (position.y + size.y + deltaPosition.y < screenSize.y) {
+          position.add(deltaPosition);
           velocity.add(_gravity * delta);
         } else {
           entity.get<VelocityComponent>()!.reset();
