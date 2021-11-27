@@ -10,7 +10,7 @@ import 'package:faster/entities/player_entity.dart';
 import 'package:faster/systems/animated_sprite_system.dart';
 import 'package:faster/systems/background_system.dart';
 import 'package:faster/systems/difficulty_system.dart';
-import 'package:faster/systems/home_system.dart';
+import 'package:faster/systems/game_status_system.dart';
 import 'package:faster/systems/jump_system.dart';
 import 'package:faster/systems/sprite_system.dart';
 import 'package:flame/flame.dart';
@@ -28,7 +28,7 @@ class FasterGame extends OxygenGame with TapDetector {
     world
       ..registerSystem(BackgroundSystem())
       ..registerSystem(SpriteSystem())
-      ..registerSystem(HomeSystem())
+      ..registerSystem(GameStatusSystem())
       ..registerSystem(AnimatedSpriteSystem())
       ..registerSystem(JumpSystem())
       ..registerSystem(DifficultySystem())
