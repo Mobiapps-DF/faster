@@ -13,6 +13,7 @@ dependencies:
     path: dependencies/flame/packages/flame/
   flame_oxygen:
     path: dependencies/flame/packages/flame_oxygen/
+  easy_localization: ^3.0.0
 
 
 dev_dependencies:
@@ -25,3 +26,4 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/i18n/

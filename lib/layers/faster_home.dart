@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 typedef OnPressCallback = void Function();
@@ -14,11 +15,30 @@ class FasterHome extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
-      child: Center(
-        child: OutlinedButton(
-          child: Text('PLAY'),
-          onPressed: onPressed,
-        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Image.asset('assets/images/faster.png'),
+          GestureDetector(
+            child: Container(
+              width: 190,
+              height: 60,
+              decoration: const BoxDecoration(
+                // color: Colors.black,
+                image: DecorationImage(image: AssetImage('assets/images/button.png'), fit: BoxFit.fill),
+              ),
+              child: Center(
+                child: Text(
+                  tr('actions.play'),
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+            onTap: onPressed,
+          )
+        ],
       ),
     );
   }
