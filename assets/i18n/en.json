@@ -1,5 +1,9 @@
 {
   "actions": {
-    "play": "Play"
+    "play": "Jouer",
+    "retry": "Touch to retry"
+  },
+  "labels": {
+    "deadPlayer": "You are dead!"
   }
 }

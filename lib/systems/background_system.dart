@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:faster/components/difficulty_component.dart';
+import 'package:faster/components/game_status_component.dart';
 import 'package:faster/components/parallax_component.dart';
 import 'package:faster/entities/background_entity.dart';
 import 'package:faster/entities/game_session_entity.dart';
@@ -16,13 +17,23 @@ class BackgroundSystem extends BaseSystem with UpdateSystem, GameRef<FasterGame>
 
   @override
   void update(double delta) {
-    difficultyComponent ??= game!.world.entityManager.getEntityByName(gameSessionEntity)?.get<DifficultyComponent>();
+    GameStatus? status = game!.world.entityManager.getEntityByName(gameSessionEntity)?.get<GameStatusComponent>()?.status;
 
-    if (difficultyComponent != null) {
-      for (var element in entities) {
-        element.get<ParallaxComponent>()?.parallax?.update(delta);
-        element.get<ParallaxComponent>()?.parallax?.baseVelocity =
-            Vector2(baseSpeed * difficultyComponent!.difficulty, 0);
+    if (status != GameStatus.dead && status != GameStatus.paused) {
+      difficultyComponent ??= game!.world.entityManager.getEntityByName(gameSessionEntity)?.get<DifficultyComponent>();
+
+      if (difficultyComponent != null) {
+        for (var element in entities) {
+          element
+              .get<ParallaxComponent>()
+              ?.parallax
+              ?.update(delta);
+          element
+              .get<ParallaxComponent>()
+              ?.parallax
+              ?.baseVelocity =
+              Vector2(baseSpeed * difficultyComponent!.difficulty, 0);
+        }
       }
     }
   }

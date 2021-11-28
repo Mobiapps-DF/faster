@@ -25,5 +25,10 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/
     - assets/i18n/
+    - assets/images/
+
+  fonts:
+    - family: RoadRage
+      fonts:
+        - asset: assets/fonts/RoadRage-Regular.ttf
