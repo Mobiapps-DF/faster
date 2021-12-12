@@ -1,8 +1,9 @@
 import 'package:faster/components/animated_sprites_component.dart';
+import 'package:faster/components/hitbox_component.dart';
 import 'package:faster/components/tap_input_component.dart';
 import 'package:faster/components/velocity_component.dart';
 import 'package:faster/faster_game.dart';
-import 'package:flame/game.dart';
+import 'package:flame/extensions.dart';
 import 'package:flame_oxygen/flame_oxygen.dart';
 
 const String playerEntity = 'Player';
@@ -20,17 +21,17 @@ Future<Entity> createPlayer(FasterGame game) async {
   ];
 
   return game.createEntity(
-      name: playerEntity,
-      position: Vector2(50, game.world.game.size.y - playerSizeY),
-      size: Vector2(playerSizeX, playerSizeY),
+    name: playerEntity,
+    position: Vector2(50, game.world.game.size.y - playerSizeY),
+    size: Vector2(playerSizeX, playerSizeY),
+  )
+    ..add<AnimatedSpritesComponent, List<SpriteAnimation>>([
+      SpriteAnimation.spriteList(runSprites, stepTime: 0.15),
+      SpriteAnimation.spriteList(jumpSprites, stepTime: 0.15),
+    ])
+    ..add<VelocityComponent, Vector2>(
+      Vector2(0, 0),
     )
-      // ..add<SpriteComponent, SpriteInit>(SpriteInit(await game.loadSprite('character.png')))
-      ..add<AnimatedSpritesComponent, List<SpriteAnimation>>([
-          SpriteAnimation.spriteList(runSprites, stepTime: 0.15),
-          SpriteAnimation.spriteList(jumpSprites, stepTime: 0.15),
-        ])
-      ..add<VelocityComponent, Vector2>(
-        Vector2(0, 0),
-      )
-      ..add<TapInputComponent, bool>(false);
+    ..add<TapInputComponent, bool>(false)
+    ..add<HitBoxComponent, Rect>();
 }
