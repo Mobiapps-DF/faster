@@ -29,7 +29,7 @@ class FasterGame extends OxygenGame with TapDetector {
   Future<void> init() async {
     await Flame.device.fullScreen();
     await Flame.device.setLandscape();
-    Random random = new Random();
+    Random random = Random();
 
     world
       ..registerSystem(BackgroundSystem())
@@ -58,7 +58,7 @@ class FasterGame extends OxygenGame with TapDetector {
       size: Vector2.all(128),
     )
       ..add<SpriteComponent, SpriteInit>(
-          SpriteInit(await loadSprite('pizza.png')))
+          SpriteInit(await loadSprite('brickSpecial01.png')))
       ..add<VelocityComponent, Vector2>(
         Vector2(-200, 0),
       );
