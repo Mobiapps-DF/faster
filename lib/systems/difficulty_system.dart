@@ -3,7 +3,7 @@ import 'package:faster/faster_game.dart';
 import 'package:faster/utils/game_status_helper.dart';
 import 'package:flame_oxygen/flame_oxygen.dart';
 
-const timeBeforeIncrease = 10;
+const timeBeforeIncrease = 15;
 
 class DifficultySystem extends System with UpdateSystem, GameRef<FasterGame> {
   Query? _query;

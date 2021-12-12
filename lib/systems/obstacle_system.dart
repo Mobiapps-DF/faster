@@ -1,6 +1,9 @@
 import 'dart:async';
+import 'dart:math';
 
+import 'package:faster/components/difficulty_component.dart';
 import 'package:faster/components/velocity_component.dart';
+import 'package:faster/entities/game_session_entity.dart';
 import 'package:faster/entities/obstacle_entity.dart';
 import 'package:faster/faster_game.dart';
 import 'package:faster/utils/game_status_helper.dart';
@@ -13,6 +16,8 @@ class ObstacleSystem extends System with UpdateSystem, GameRef<FasterGame> {
   Query? _query;
   double elapsedTime = 0;
   int obstacleNumber = 0;
+
+  DifficultyComponent? difficultyComponent;
 
   @override
   void init() {
@@ -31,10 +36,14 @@ class ObstacleSystem extends System with UpdateSystem, GameRef<FasterGame> {
 
   @override
   void update(double delta) {
-    if (game != null && isPlaying(game!)) {
+    difficultyComponent ??= game!.world.entityManager.getEntityByName(gameSessionEntity)?.get<DifficultyComponent>();
+
+    if (difficultyComponent != null && game != null && isPlaying(game!)) {
       elapsedTime += delta;
-      // TODO: partir plutot sur une probabilité d'apparition en fonction du temps ecoule
-      if (elapsedTime > maxObstacleApparitionTime) {
+
+      double probability = elapsedTime / maxObstacleApparitionTime;
+
+      if (probability > Random(1).nextDouble()) {
         elapsedTime = 0;
         createObstacle(obstacleNumber, game!);
       }
@@ -46,7 +55,7 @@ class ObstacleSystem extends System with UpdateSystem, GameRef<FasterGame> {
         final size = entity.get<SizeComponent>()!.size;
 
         if (position.y + size.y <= screenSize.y) {
-          position.add((velocity * delta));
+          position.add((velocity * delta * (1 + log(difficultyComponent!.difficulty.toDouble()))));
         } else {
           entity.dispose();
         }
