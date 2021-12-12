@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:faster/components/animated_sprites_component.dart';
 import 'package:faster/components/game_status_component.dart';
 import 'package:faster/entities/game_session_entity.dart';
