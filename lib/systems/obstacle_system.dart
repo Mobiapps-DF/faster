@@ -12,6 +12,7 @@ class ObstacleSystem extends System with UpdateSystem, GameRef<FasterGame> {
   Timer? timer;
   Query? _query;
   double elapsedTime = 0;
+  int obstacleNumber = 0;
 
   @override
   void init() {
@@ -35,7 +36,7 @@ class ObstacleSystem extends System with UpdateSystem, GameRef<FasterGame> {
       // TODO: partir plutot sur une probabilité d'apparition en fonction du temps ecoule
       if (elapsedTime > maxObstacleApparitionTime) {
         elapsedTime = 0;
-        createObstacle(game!);
+        createObstacle(obstacleNumber, game!);
       }
 
       for (final entity in _query?.entities ?? <Entity>[]) {
