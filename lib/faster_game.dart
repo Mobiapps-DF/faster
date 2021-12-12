@@ -13,23 +13,20 @@ import 'package:faster/systems/debug_system.dart';
 import 'package:faster/systems/difficulty_system.dart';
 import 'package:faster/systems/game_status_system.dart';
 import 'package:faster/systems/jump_system.dart';
+import 'package:faster/systems/obstacle_system.dart';
 import 'package:faster/systems/sprite_system.dart';
 import 'package:faster/utils/game_status_helper.dart';
-import 'package:faster/systems/obstacle_system.dart';
-
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flame/parallax.dart';
 import 'package:flame_oxygen/flame_oxygen.dart';
-import 'dart:math';
 
 class FasterGame extends OxygenGame with TapDetector {
   @override
   Future<void> init() async {
     await Flame.device.fullScreen();
     await Flame.device.setLandscape();
-    Random random = Random();
 
     world
       ..registerSystem(BackgroundSystem())
@@ -50,18 +47,6 @@ class FasterGame extends OxygenGame with TapDetector {
     createGameSession(this);
     await createPlayer(this);
     await createBackground(this);
-
-    createEntity(
-      name: 'Obstacle',
-      position: Vector2(world.game.size.x - 50,
-          random.nextDouble() * (world.game.size.y) - 128),
-      size: Vector2.all(128),
-    )
-      ..add<SpriteComponent, SpriteInit>(
-          SpriteInit(await loadSprite('brickSpecial01.png')))
-      ..add<VelocityComponent, Vector2>(
-        Vector2(-200, 0),
-      );
   }
 
   @override

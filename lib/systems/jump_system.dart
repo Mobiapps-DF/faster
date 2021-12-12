@@ -30,7 +30,8 @@ class JumpSystem extends System with UpdateSystem, GameRef<FasterGame> {
 
   @override
   void update(double delta) {
-    GameStatus? status = game!.world.entityManager.getEntityByName(gameSessionEntity)?.get<GameStatusComponent>()?.status;
+    GameStatus? status =
+        game!.world.entityManager.getEntityByName(gameSessionEntity)?.get<GameStatusComponent>()?.status;
 
     if (status != GameStatus.dead && status != GameStatus.paused) {
       // https://gamedev.stackexchange.com/questions/15708/how-can-i-implement-gravity
