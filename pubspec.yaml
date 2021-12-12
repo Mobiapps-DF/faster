@@ -13,6 +13,7 @@ dependencies:
     path: dependencies/flame/packages/flame/
   flame_oxygen:
     path: dependencies/flame/packages/flame_oxygen/
+  easy_localization: ^3.0.0
 
 
 dev_dependencies:
@@ -24,4 +25,10 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/i18n/
     - assets/images/
+
+  fonts:
+    - family: RoadRage
+      fonts:
+        - asset: assets/fonts/RoadRage-Regular.ttf
