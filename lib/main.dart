@@ -2,6 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:faster/faster_game.dart';
 import 'package:faster/layers/faster_dead_layer.dart';
 import 'package:faster/layers/faster_home_layer.dart';
+import 'package:faster/layers/faster_paused_layer.dart';
+import 'package:faster/layers/faster_playing_layer.dart';
 import 'package:faster/utils/game_status_helper.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +38,12 @@ class App extends StatelessWidget {
           overlayBuilderMap: {
             FasterHome.name: (BuildContext context, FasterGame game) {
               return FasterHome(() => setPlaying(game));
+            },
+            FasterPlaying.name: (BuildContext context, FasterGame game) {
+              return FasterPlaying(() => setPaused(game));
+            },
+            FasterPaused.name:(BuildContext context, FasterGame game) {
+              return FasterPaused(() => unsetPause(game));
             },
             FasterDead.name: (BuildContext context, FasterGame game) {
               return FasterDead(() => setPlaying(game));

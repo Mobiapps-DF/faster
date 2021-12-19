@@ -4,6 +4,7 @@
     "retry": "Touch to retry"
   },
   "labels": {
-    "deadPlayer": "You are dead!"
+    "deadPlayer": "You are dead!",
+    "paused": "Paused"
   }
 }

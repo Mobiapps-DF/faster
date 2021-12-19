@@ -24,3 +24,17 @@ setPlaying(FasterGame game) {
     game.world.entityManager.processRemovedEntities();
   }
 }
+
+setPaused(FasterGame game) {
+  Entity? gameEntity = game.world.entityManager.getEntityByName(gameSessionEntity);
+  if (gameEntity != null) {
+    gameEntity.get<GameStatusComponent>()?.status = GameStatus.paused;
+  }
+}
+
+unsetPause(FasterGame game) {
+  Entity? gameEntity = game.world.entityManager.getEntityByName(gameSessionEntity);
+  if (gameEntity != null) {
+    gameEntity.get<GameStatusComponent>()?.status = GameStatus.playing;
+  }
+}
