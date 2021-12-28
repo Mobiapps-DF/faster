@@ -16,7 +16,7 @@ class FasterPlaying extends StatelessWidget {
         top: 0,
         right: 0,
         child: IconButton(
-          icon: const ImageIcon(AssetImage("assets/images/pause.png")),
+          icon: const ImageIcon(AssetImage("assets/images/pause.png"), color: Color(0xff1ea7e1)),
           onPressed: () => onPaused(),
         ),
       )
