@@ -24,7 +24,6 @@ class FasterHome extends StatelessWidget {
               width: 190,
               height: 60,
               decoration: const BoxDecoration(
-                // color: Colors.black,
                 image: DecorationImage(image: AssetImage('assets/images/button.png'), fit: BoxFit.fill),
               ),
               child: Center(

@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 typedef OnPressCallback = void Function();
@@ -20,9 +19,14 @@ class FasterDead extends StatelessWidget {
       child: SizedBox(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [Text(tr('labels.deadPlayer')), Text(tr('actions.retry'))])),
+          child: Center(
+            child: Container(
+                width: 400,
+                height: 120,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(image: AssetImage('assets/images/dead.png'), fit: BoxFit.contain),
+                )),
+          ))
     );
   }
 }
