@@ -10,20 +10,19 @@ import 'package:flame_oxygen/flame_oxygen.dart';
 const obstacleEntity = 'Obstacle';
 
 const baseObstacleVelocity = 200.0;
-const obstacleSize = 92.0;
+const obstacleSizes = [64.0, 92.0];
 
-Future<Entity> createObstacle(int number, FasterGame game) async {
+Future<Entity> createObstacle(int number, int obstacleSize, FasterGame game) async {
   Random random = Random();
   return game.createEntity(
     name: '$obstacleEntity$number',
-    position: Vector2(game.size.x - 50,
-        random.nextDouble() * (game.size.y) - obstacleSize),
-    size: Vector2.all(obstacleSize),
+    position: Vector2(game.size.x, random.nextDouble() * (game.size.y) + obstacleSize),
+    size: Vector2.all(obstacleSizes[obstacleSize]),
   )
     ..add<SpriteComponent, SpriteInit>(
         SpriteInit(await game.loadSprite('brickSpecial${NumberFormat('00').format(random.nextInt(9) + 1)}.png')))
     ..add<VelocityComponent, Vector2>(
       Vector2(-baseObstacleVelocity, 0),
     )
-  ..add<HitBoxComponent, void>();
+    ..add<HitBoxComponent, void>();
 }

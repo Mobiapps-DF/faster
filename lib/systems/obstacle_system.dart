@@ -45,7 +45,7 @@ class ObstacleSystem extends System with UpdateSystem, GameRef<FasterGame> {
 
       if (probability > Random(1).nextDouble()) {
         elapsedTime = 0;
-        createObstacle(obstacleNumber, game!);
+        createObstacle(obstacleNumber, Random().nextInt(obstacleSizes.length), game!);
       }
 
       for (final entity in _query?.entities ?? <Entity>[]) {
