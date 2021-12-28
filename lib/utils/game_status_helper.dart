@@ -9,6 +9,9 @@ import 'package:faster/faster_game.dart';
 import 'package:flame/game.dart';
 import 'package:flame_oxygen/flame_oxygen.dart';
 
+GameStatus? getGameStatus(FasterGame? game) =>
+    game?.world.entityManager.getEntityByName(gameSessionEntity)?.get<GameStatusComponent>()?.status;
+
 bool isPlaying(FasterGame game) =>
     game.world.entityManager.getEntityByName(gameSessionEntity)?.get<GameStatusComponent>()?.status ==
     GameStatus.playing;
