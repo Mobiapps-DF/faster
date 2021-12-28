@@ -31,6 +31,7 @@ class FasterHome extends StatelessWidget {
                   tr('actions.play'),
                   style: const TextStyle(
                     color: Colors.white,
+                    fontSize: 48
                   ),
                 ),
               ),
