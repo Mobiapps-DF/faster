@@ -16,7 +16,7 @@ Future<Entity> createObstacle(int number, int obstacleSize, FasterGame game) asy
   Random random = Random();
   return game.createEntity(
     name: '$obstacleEntity$number',
-    position: Vector2(game.size.x, random.nextDouble() * (game.size.y) + obstacleSize),
+    position: Vector2(game.size.x, random.nextDouble() * (game.size.y - obstacleSize)),
     size: Vector2.all(obstacleSizes[obstacleSize]),
   )
     ..add<SpriteComponent, SpriteInit>(

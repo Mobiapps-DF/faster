@@ -51,10 +51,9 @@ class ObstacleSystem extends System with UpdateSystem, GameRef<FasterGame> {
       for (final entity in _query?.entities ?? <Entity>[]) {
         final velocity = entity.get<VelocityComponent>()!.velocity;
         var position = entity.get<PositionComponent>()!.position;
-        final screenSize = game!.size;
         final size = entity.get<SizeComponent>()!.size;
 
-        if (position.y + size.y <= screenSize.y) {
+        if (position.x > -size.x) {
           position.add((velocity * delta * (1 + log(difficultyComponent!.difficulty.toDouble()))));
         } else {
           entity.dispose();
