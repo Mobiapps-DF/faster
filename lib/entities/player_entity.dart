@@ -1,5 +1,6 @@
 import 'package:faster/components/animated_sprites_component.dart';
 import 'package:faster/components/hitbox_component.dart';
+import 'package:faster/components/score_component.dart';
 import 'package:faster/components/tap_input_component.dart';
 import 'package:faster/components/velocity_component.dart';
 import 'package:faster/faster_game.dart';
@@ -33,5 +34,6 @@ Future<Entity> createPlayer(FasterGame game) async {
       Vector2(0, 0),
     )
     ..add<TapInputComponent, bool>(false)
-    ..add<HitBoxComponent, Rect>();
+    ..add<HitBoxComponent, Rect>()
+    ..add<ScoreComponent, double>(0);
 }

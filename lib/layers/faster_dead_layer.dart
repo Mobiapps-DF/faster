@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:faster/utils/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -33,7 +34,7 @@ class FasterDead extends StatelessWidget {
                       )),
                   Text(
                     tr('actions.retry'),
-                    style: const TextStyle(fontSize: 36, color: Color(0xff1ea7e1)),
+                    style: const TextStyle(fontSize: 36, color: appLightBlue),
                   )
                 ],
               ),

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:faster/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 typedef OnPressCallback = void Function();
@@ -54,7 +55,7 @@ class _FasterPausedState extends State<FasterPaused> {
                 ? Center(
                     child: Text(
                     _ticker.toString(),
-                    style: const TextStyle(fontSize: 48, color: Color(0xff1ea7e1)),
+                    style: const TextStyle(fontSize: 48, color: appLightBlue),
                   ))
                 : const Center(child: _Paused())));
   }

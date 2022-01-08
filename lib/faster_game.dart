@@ -3,6 +3,7 @@ import 'package:faster/components/difficulty_component.dart';
 import 'package:faster/components/game_status_component.dart';
 import 'package:faster/components/hitbox_component.dart';
 import 'package:faster/components/parallax_component.dart';
+import 'package:faster/components/score_component.dart';
 import 'package:faster/components/tap_input_component.dart';
 import 'package:faster/components/velocity_component.dart';
 import 'package:faster/entities/background_entity.dart';
@@ -17,6 +18,7 @@ import 'package:faster/systems/game_status_system.dart';
 import 'package:faster/systems/hitbox_system.dart';
 import 'package:faster/systems/jump_system.dart';
 import 'package:faster/systems/obstacle_system.dart';
+import 'package:faster/systems/score_system.dart';
 import 'package:faster/systems/sprite_system.dart';
 import 'package:faster/utils/game_status_helper.dart';
 import 'package:flame/flame.dart';
@@ -41,13 +43,15 @@ class FasterGame extends OxygenGame with TapDetector {
       ..registerSystem(ObstacleSystem())
       ..registerSystem(HitBoxSystem())
       ..registerSystem(CollisionSystem())
+      ..registerSystem(ScoreSystem())
       ..registerComponent<VelocityComponent, Vector2>(() => VelocityComponent())
       ..registerComponent<TapInputComponent, bool>(() => TapInputComponent())
       ..registerComponent<ParallaxComponent, Parallax>(() => ParallaxComponent())
       ..registerComponent<DifficultyComponent, int>(() => DifficultyComponent())
       ..registerComponent<GameStatusComponent, GameStatus>(() => GameStatusComponent())
       ..registerComponent<AnimatedSpritesComponent, List<SpriteAnimation>>(() => AnimatedSpritesComponent())
-      ..registerComponent<HitBoxComponent, void>(() => HitBoxComponent());
+      ..registerComponent<HitBoxComponent, void>(() => HitBoxComponent())
+      ..registerComponent<ScoreComponent, double>(() => ScoreComponent());
 
     createGameSession(this);
     await createPlayer(this);
