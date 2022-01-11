@@ -5,6 +5,7 @@
   },
   "labels": {
     "deadPlayer": "Vous êtes mort !",
-    "paused": "Pause"
+    "paused": "Pause",
+    "highScore": "Record"
   }
 }

@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 typedef OnPressCallback = void Function();
 
 class FasterHome extends StatelessWidget {
+  final double highScore;
+
   static String name = 'faster_home';
 
   final OnPressCallback onPressed;
 
-  const FasterHome(this.onPressed, {Key? key}) : super(key: key);
+  const FasterHome(this.onPressed, {required this.highScore, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +21,12 @@ class FasterHome extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Image.asset('assets/images/faster.png'),
+          Text(
+            '${tr('labels.highScore')}: ${highScore.round()}',
+            style: const TextStyle(
+              fontSize: 32,
+            ),
+          ),
           GestureDetector(
             child: Container(
               width: 190,

@@ -6,6 +6,7 @@ import 'package:faster/layers/faster_home_layer.dart';
 import 'package:faster/layers/faster_paused_layer.dart';
 import 'package:faster/layers/faster_playing_layer.dart';
 import 'package:faster/utils/game_status_helper.dart';
+import 'package:faster/utils/user_preferences.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 
@@ -13,17 +14,21 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
 
+  final highScore = await getHighScore();
+
   runApp(EasyLocalization(
     supportedLocales: const [Locale('en', 'US'), Locale('fr', 'FR')],
     path: 'assets/i18n',
     fallbackLocale: const Locale('en', 'US'),
     useOnlyLangCode: true,
-    child: const App(),
+    child: App(highScore: highScore,),
   ));
 }
 
 class App extends StatefulWidget {
-  const App({Key? key}) : super(key: key);
+  final double highScore;
+
+  const App({required this.highScore, Key? key}) : super(key: key);
 
   @override
   State<App> createState() => _AppState();
@@ -75,7 +80,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
           game: _game!,
           overlayBuilderMap: {
             FasterHome.name: (BuildContext context, FasterGame game) {
-              return FasterHome(() => setPlaying(game));
+              return FasterHome(() => setPlaying(game), highScore: widget.highScore,);
             },
             FasterPlaying.name: (BuildContext context, FasterGame game) {
               return FasterPlaying(() => setPaused(game));
