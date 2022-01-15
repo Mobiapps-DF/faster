@@ -27,6 +27,10 @@ import 'package:flame/parallax.dart';
 import 'package:flame_oxygen/flame_oxygen.dart';
 
 class FasterGame extends OxygenGame with TapDetector {
+  final SetDoubleCallback saveScore;
+
+  FasterGame({ required this.saveScore });
+
   @override
   Future<void> init() async {
     await Flame.device.fullScreen();
@@ -43,7 +47,7 @@ class FasterGame extends OxygenGame with TapDetector {
       ..registerSystem(ObstacleSystem())
       ..registerSystem(HitBoxSystem())
       ..registerSystem(CollisionSystem())
-      ..registerSystem(ScoreSystem())
+      ..registerSystem(ScoreSystem(saveScore: saveScore))
       ..registerComponent<VelocityComponent, Vector2>(() => VelocityComponent())
       ..registerComponent<TapInputComponent, bool>(() => TapInputComponent())
       ..registerComponent<ParallaxComponent, Parallax>(() => ParallaxComponent())

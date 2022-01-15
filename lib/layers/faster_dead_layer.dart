@@ -1,7 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:faster/utils/colors.dart';
+import 'package:faster/utils/user_preferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 typedef OnPressCallback = void Function();
 
@@ -14,6 +16,8 @@ class FasterDead extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final highScore = Provider.of<UserPreferences>(context).highScore;
+
     return GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () {
@@ -27,11 +31,18 @@ class FasterDead extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Container(
-                      width: 400,
-                      height: 120,
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(image: AssetImage('assets/images/dead.png'), fit: BoxFit.contain),
-                      )),
+                    width: 400,
+                    height: 120,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(image: AssetImage('assets/images/dead.png'), fit: BoxFit.contain),
+                    ),
+                  ),
+                  Text(
+                    '${tr('labels.highScore')}: ${highScore.round()}',
+                    style: const TextStyle(
+                      fontSize: 32,
+                    ),
+                  ),
                   Text(
                     tr('actions.retry'),
                     style: const TextStyle(fontSize: 36, color: appLightBlue),

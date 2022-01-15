@@ -6,7 +6,6 @@ import 'package:faster/entities/game_session_entity.dart';
 import 'package:faster/entities/player_entity.dart';
 import 'package:faster/faster_game.dart';
 import 'package:faster/utils/colors.dart';
-import 'package:faster/utils/user_preferences.dart';
 import 'package:flame/game.dart';
 import 'package:flame_oxygen/flame_oxygen.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +20,13 @@ final TextPaint textPaint = TextPaint(
 
 const double scoreMultiplier = 0.25;
 
+typedef SetDoubleCallback = void Function(double);
+
 class ScoreSystem extends System with UpdateSystem, RenderSystem, GameRef<FasterGame> {
   Query? _query;
+  final SetDoubleCallback saveScore;
+
+  ScoreSystem({ required this.saveScore });
 
   @override
   void init() {
@@ -59,17 +63,12 @@ class ScoreSystem extends System with UpdateSystem, RenderSystem, GameRef<Faster
     for (final entity in _query?.entities ?? <Entity>[]) {
       final score = entity.get<ScoreComponent>()?.roundedScore ?? 0;
 
-      textPaint.render(canvas, '$score', Vector2(10, 10));
+      textPaint.render(canvas, '$score', Vector2(20, 10));
     }
   }
 
-  Future<void> _resetScoreAndHighScore(ScoreComponent scoreComponent) async {
-    final highScore = await getHighScore();
-
-    if (scoreComponent.realScore > highScore) {
-      await saveHighScore(scoreComponent.realScore);
-    }
-    
+  void _resetScoreAndHighScore(ScoreComponent scoreComponent) {
+    saveScore(scoreComponent.realScore);
     scoreComponent.reset();
   }
 }

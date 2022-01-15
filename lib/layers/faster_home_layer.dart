@@ -1,19 +1,21 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:faster/utils/user_preferences.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 typedef OnPressCallback = void Function();
 
 class FasterHome extends StatelessWidget {
-  final double highScore;
-
   static String name = 'faster_home';
 
   final OnPressCallback onPressed;
 
-  const FasterHome(this.onPressed, {required this.highScore, Key? key}) : super(key: key);
+  const FasterHome(this.onPressed, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final highScore = Provider.of<UserPreferences>(context).highScore;
+    
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
