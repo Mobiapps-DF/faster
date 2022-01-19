@@ -21,6 +21,7 @@ import 'package:faster/systems/obstacle_system.dart';
 import 'package:faster/systems/score_system.dart';
 import 'package:faster/systems/sprite_system.dart';
 import 'package:faster/utils/game_status_helper.dart';
+import 'package:faster/utils/obstacle_patterns.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/input.dart';
 import 'package:flame/parallax.dart';
@@ -36,6 +37,8 @@ class FasterGame extends OxygenGame with TapDetector {
     await Flame.device.fullScreen();
     await Flame.device.setLandscape();
 
+    final patternsList = await loadPatterns();
+
     world
       ..registerSystem(BackgroundSystem())
       ..registerSystem(SpriteSystem())
@@ -44,7 +47,7 @@ class FasterGame extends OxygenGame with TapDetector {
       ..registerSystem(JumpSystem())
       ..registerSystem(DifficultySystem())
       ..registerSystem(DebugSystem())
-      ..registerSystem(ObstacleSystem())
+      ..registerSystem(ObstacleSystem(patternsList))
       ..registerSystem(HitBoxSystem())
       ..registerSystem(CollisionSystem())
       ..registerSystem(ScoreSystem(saveScore: saveScore))

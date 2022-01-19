@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'obstacle_patterns.g.dart';
@@ -49,4 +52,31 @@ class PatternList {
       p.probability = (1 / patterns.length);
     }
   }
+
+  /// Returns the most probable next pattern and updates the probabilities for all
+  /// patterns in the list.
+  Pattern getNextPattern() {
+    // Find the most probable pattern
+    patterns.sort((a, b) => a.probability!.compareTo(b.probability!));
+
+    final nextPattern = patterns.removeAt(0);
+    final redistributedProbability = (nextPattern.probability ?? 0) / patterns.length;
+
+    // Redistribute the probability of next pattern between remaining patterns
+    nextPattern.probability = 0;
+    for (final p in patterns) {
+      p.probability = (p.probability ?? 0) + redistributedProbability;
+    }
+
+    // Put next pattern back in the list with a zero probability
+    patterns.add(nextPattern);
+    
+    return nextPattern;
+  }
+}
+
+Future<PatternList> loadPatterns() async {
+  final patternsJson = await rootBundle.loadString(patternsFileName);
+
+  return PatternList.fromJson(jsonDecode(patternsJson));
 }

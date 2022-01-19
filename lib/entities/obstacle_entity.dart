@@ -25,8 +25,8 @@ Future<Entity> createObstacle(
   return game.createEntity(
     name: '$obstacleEntity$number',
     position: Vector2(
-      positionX ?? game.size.x,
-      positionY ?? random.nextDouble() * (game.size.y - obstacleSize),
+      game.size.x + (positionX ?? 1) * game.size.x,
+      (positionY ?? 1) * random.nextDouble() * (game.size.y - obstacleSize),
     ),
     size: Vector2.all(obstacleSizes[obstacleSize]),
   )
