@@ -57,7 +57,7 @@ class PatternList {
   /// patterns in the list.
   Pattern getNextPattern() {
     // Find the most probable pattern
-    patterns.sort((a, b) => a.probability!.compareTo(b.probability!));
+    patterns.sort((a, b) => b.probability!.compareTo(a.probability!));
 
     final nextPattern = patterns.removeAt(0);
     final redistributedProbability = (nextPattern.probability ?? 0) / patterns.length;
