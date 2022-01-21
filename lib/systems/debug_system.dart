@@ -1,5 +1,7 @@
 import 'package:faster/components/hitbox_component.dart';
+import 'package:faster/entities/player_entity.dart';
 import 'package:faster/faster_game.dart';
+import 'package:faster/utils/hitbox_helper.dart';
 import 'package:flame/effects.dart';
 import 'package:flame_oxygen/flame_oxygen.dart';
 import 'package:flutter/material.dart';
@@ -20,8 +22,17 @@ class DebugSystem extends BaseSystem with GameRef<FasterGame> {
 
   @override
   void renderEntity(Canvas canvas, Entity entity) {
+    final hitbox = entity.get<HitBoxComponent>()!.value;
     final size = entity.get<SizeComponent>()!.size;
+    final resetVector = entity.name == playerEntity ? Vector2(size.x / 4, size.y / 5) : Vector2.zero();
+    Rect hitboxDebug;
 
-    canvas.drawRect(Vector2.zero() & size, debugPaint);
+    if (hitbox != null) {
+      hitboxDebug = resetVector & Vector2(hitbox.size.width, hitbox.size.height);
+    } else {
+      hitboxDebug = resetVector & size;
+    }
+
+    canvas.drawRect(hitboxDebug, debugPaint);
   }
 }
