@@ -61,6 +61,8 @@ class ObstacleSystem extends System with UpdateSystem, GameRef<FasterGame> {
             game!,
             positionX: obstacle.posX,
             positionY: obstacle.posY,
+            deltaX: obstacle.deltaX,
+            deltaY: obstacle.deltaY,
           );
         }
       }

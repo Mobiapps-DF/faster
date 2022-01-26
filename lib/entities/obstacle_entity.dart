@@ -17,16 +17,22 @@ Future<Entity> createObstacle(
   int obstacleSize,
   FasterGame game,
   {
-    double? positionX,
-    double? positionY,
+    required double positionX,
+    required double positionY,
+    required double deltaX,
+    required double deltaY,
   }
 ) async {
   Random random = Random();
+
+  final xVariation = (random.nextDouble() * 2 - 1) * deltaX;
+  final yVariation = (random.nextDouble() * 2 - 1) * deltaY;
+
   return game.createEntity(
     name: '$obstacleEntity$number',
     position: Vector2(
-      game.size.x + (positionX ?? 1) * game.size.x,
-      (positionY ?? 1) * game.size.y - obstacleSize,
+      (game.size.x + positionX * game.size.x) * (1 + xVariation),
+      (positionY * game.size.y - obstacleSize) * (1 + yVariation),
     ),
     size: Vector2.all(obstacleSizes[obstacleSize]),
   )

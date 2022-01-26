@@ -11,10 +11,20 @@ const patternsFileName = 'assets/config/patterns.json';
 class Obstacle {
   final double posX;
   final double posY;
+  final double deltaX;
+  final double deltaY;
   
-  Obstacle get reversed => Obstacle(posX: posX, posY: 1 - posY);
+  Obstacle get reversed => Obstacle(
+    posX: posX,
+    posY: 1 - posY,
+  );
 
-  Obstacle({ required this.posX, required this.posY });
+  Obstacle({
+    required this.posX,
+    required this.posY,
+    this.deltaX = 0.1,
+    this.deltaY = 0.1,
+  });
 
   factory Obstacle.fromJson(Map<String, dynamic> json) => _$ObstacleFromJson(json);
 }

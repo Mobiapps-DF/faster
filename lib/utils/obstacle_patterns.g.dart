@@ -9,6 +9,8 @@ part of 'obstacle_patterns.dart';
 Obstacle _$ObstacleFromJson(Map<String, dynamic> json) => Obstacle(
       posX: (json['posX'] as num).toDouble(),
       posY: (json['posY'] as num).toDouble(),
+      deltaX: (json['deltaX'] as num?)?.toDouble() ?? 0.1,
+      deltaY: (json['deltaY'] as num?)?.toDouble() ?? 0.1,
     );
 
 Pattern _$PatternFromJson(Map<String, dynamic> json) => Pattern(
