@@ -4,12 +4,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:faster/components/hitbox_component.dart';
 import 'package:faster/components/velocity_component.dart';
 import 'package:faster/faster_game.dart';
+import 'package:faster/utils/constants.dart';
 import 'package:flame/game.dart';
 import 'package:flame_oxygen/flame_oxygen.dart';
 
 const obstacleEntity = 'Obstacle';
 
-const baseObstacleVelocity = 200.0;
 const obstacleSizes = [64.0, 92.0];
 
 Future<Entity> createObstacle(int number, int obstacleSize, FasterGame game) async {
@@ -22,7 +22,7 @@ Future<Entity> createObstacle(int number, int obstacleSize, FasterGame game) asy
     ..add<SpriteComponent, SpriteInit>(
         SpriteInit(await game.loadSprite('brickSpecial${NumberFormat('00').format(random.nextInt(9) + 1)}.png')))
     ..add<VelocityComponent, Vector2>(
-      Vector2(-baseObstacleVelocity, 0),
+      baseVelocity,
     )
     ..add<HitBoxComponent, void>();
 }

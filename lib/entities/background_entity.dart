@@ -1,18 +1,18 @@
 import 'package:faster/components/difficulty_component.dart';
 import 'package:faster/components/parallax_component.dart';
 import 'package:faster/faster_game.dart';
+import 'package:faster/systems/background_system.dart';
+import 'package:faster/utils/constants.dart';
 import 'package:flame/game.dart';
 import 'package:flame/parallax.dart';
 import 'package:flame_oxygen/flame_oxygen.dart';
-
-const baseSpeed = 10.0;
 
 const backgroundEntity = 'Background';
 
 Future<Entity> createBackground(FasterGame game) async {
   var parallax = await game.loadParallax(
-    [ParallaxImageData('background.png'), ParallaxImageData('groundGrass.png')],
-    baseVelocity: Vector2(baseSpeed, 0),
+    [ParallaxImageData(backgrounds[0]), ParallaxImageData('groundGrass.png')],
+    baseVelocity: baseVelocity,
     velocityMultiplierDelta: Vector2(1.8, 1.0),
   );
 

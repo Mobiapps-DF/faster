@@ -6,16 +6,17 @@ import 'package:faster/components/velocity_component.dart';
 import 'package:faster/entities/game_session_entity.dart';
 import 'package:faster/entities/obstacle_entity.dart';
 import 'package:faster/faster_game.dart';
+import 'package:faster/utils/constants.dart';
 import 'package:faster/utils/game_status_helper.dart';
 import 'package:flame_oxygen/flame_oxygen.dart';
 
-const maxObstacleApparitionTime = 5; //sec
+const maxObstacleApparitionDistance = 5; // whatever
 
 class ObstacleSystem extends System with UpdateSystem, GameRef<FasterGame> {
   Timer? timer;
   Query? _query;
-  double elapsedTime = 0;
-  int obstacleNumber = 0;
+  double _elapsedTime = 0;
+  final int _obstacleNumber = 0;
 
   DifficultyComponent? difficultyComponent;
 
@@ -39,22 +40,23 @@ class ObstacleSystem extends System with UpdateSystem, GameRef<FasterGame> {
     difficultyComponent ??= game!.world.entityManager.getEntityByName(gameSessionEntity)?.get<DifficultyComponent>();
 
     if (difficultyComponent != null && game != null && isPlaying(game!)) {
-      elapsedTime += delta;
+      _elapsedTime += delta;
 
-      double probability = elapsedTime / maxObstacleApparitionTime;
+      double time = baseVelocity.x / difficultyComponent!.difficulty.toDouble();
+      double probability = _elapsedTime / time;
 
       if (probability > Random(1).nextDouble()) {
-        elapsedTime = 0;
-        createObstacle(obstacleNumber, Random().nextInt(obstacleSizes.length), game!);
+        _elapsedTime = 0;
+        createObstacle(_obstacleNumber, Random().nextInt(obstacleSizes.length), game!);
       }
 
       for (final entity in _query?.entities ?? <Entity>[]) {
-        final velocity = entity.get<VelocityComponent>()!.velocity;
+        final velocity = entity.get<VelocityComponent>()!.velocity * difficultyComponent!.difficulty.toDouble();
         var position = entity.get<PositionComponent>()!.position;
         final size = entity.get<SizeComponent>()!.size;
 
         if (position.x > -size.x) {
-          position.add((velocity * delta * (1 + log(difficultyComponent!.difficulty.toDouble()))));
+          position.sub(velocity * delta);
         } else {
           entity.dispose();
         }
