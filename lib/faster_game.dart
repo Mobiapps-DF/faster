@@ -41,6 +41,12 @@ class FasterGame extends OxygenGame with TapDetector {
 
     FlameAudio.bgm.load('music.mp3');
 
+    await FlameAudio.audioCache.loadAll([
+      'click.mp3',
+      'death.mp3',
+      'jump.mp3',
+    ]);
+
     world
       ..registerSystem(BackgroundSystem())
       ..registerSystem(SpriteSystem())
@@ -71,7 +77,10 @@ class FasterGame extends OxygenGame with TapDetector {
   void onTapCancel() => _revertIsTapped();
 
   @override
-  void onTapDown(TapDownInfo info) => _revertIsTapped();
+  void onTapDown(TapDownInfo info) {
+    FlameAudio.play('jump.mp3', volume: 0.8);
+    _revertIsTapped();
+  }
 
   @override
   void onTapUp(TapUpInfo info) => _revertIsTapped();

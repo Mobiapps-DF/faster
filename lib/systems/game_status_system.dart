@@ -64,6 +64,7 @@ class GameStatusSystem extends System with UpdateSystem, GameRef<FasterGame> {
         break;
       case GameStatus.dead:
         FlameAudio.bgm.stop();
+        FlameAudio.play('death.mp3');
         game!.overlays.add(FasterDead.name);
         break;
       case GameStatus.paused:
