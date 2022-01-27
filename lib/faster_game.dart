@@ -24,6 +24,7 @@ import 'package:faster/utils/game_status_helper.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/input.dart';
 import 'package:flame/parallax.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_oxygen/flame_oxygen.dart';
 
 class FasterGame extends OxygenGame with TapDetector {
@@ -35,6 +36,10 @@ class FasterGame extends OxygenGame with TapDetector {
   Future<void> init() async {
     await Flame.device.fullScreen();
     await Flame.device.setLandscape();
+
+    FlameAudio.bgm.initialize();
+
+    FlameAudio.bgm.load('music.mp3');
 
     world
       ..registerSystem(BackgroundSystem())
