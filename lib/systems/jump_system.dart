@@ -8,8 +8,8 @@ import 'package:flame/extensions.dart';
 import 'package:flame_oxygen/flame_oxygen.dart';
 
 class JumpSystem extends System with UpdateSystem, GameRef<FasterGame> {
-  final _gravity = Vector2(0, 2000);
-  final _jumpForce = Vector2(0, -2000);
+  final _gravity = Vector2(0, 1000);
+  final _jumpForce = Vector2(0, -1500);
   Query? _query;
 
   @override
