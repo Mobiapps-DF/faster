@@ -8,6 +8,7 @@ import 'package:faster/layers/faster_playing_layer.dart';
 import 'package:faster/utils/game_status_helper.dart';
 import 'package:faster/utils/user_preferences.dart';
 import 'package:flame/game.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -83,16 +84,28 @@ class _AppState extends State<App> with WidgetsBindingObserver {
           game: _game!,
           overlayBuilderMap: {
             FasterHome.name: (BuildContext context, FasterGame game) {
-              return FasterHome(() => setPlaying(game));
+              return FasterHome(() {
+                FlameAudio.play('click.mp3');
+                setPlaying(game);
+              });
             },
             FasterPlaying.name: (BuildContext context, FasterGame game) {
-              return FasterPlaying(() => setPaused(game));
+              return FasterPlaying(() {
+                FlameAudio.play('click.mp3');
+                setPaused(game);
+              });
             },
             FasterPaused.name: (BuildContext context, FasterGame game) {
-              return FasterPaused(() => unsetPause(game));
+              return FasterPaused(() {
+                FlameAudio.play('click.mp3');
+                unsetPause(game);
+              });
             },
             FasterDead.name: (BuildContext context, FasterGame game) {
-              return FasterDead(() => setPlaying(game));
+              return FasterDead(() {
+                FlameAudio.play('click.mp3');
+                setPlaying(game);
+              });
             },
           },
           initialActiveOverlays: [

@@ -11,6 +11,8 @@ dependencies:
     sdk: flutter
   flame:
     path: dependencies/flame/packages/flame/
+  flame_audio:
+    path: dependencies/flame/packages/flame_audio/
   flame_oxygen:
     path: dependencies/flame/packages/flame_oxygen/
   easy_localization: ^3.0.0
@@ -30,6 +32,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/audio/
     - assets/i18n/
     - assets/images/
     - assets/config/

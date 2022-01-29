@@ -25,6 +25,7 @@ import 'package:faster/utils/obstacle_patterns.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/input.dart';
 import 'package:flame/parallax.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_oxygen/flame_oxygen.dart';
 
 class FasterGame extends OxygenGame with TapDetector {
@@ -38,6 +39,15 @@ class FasterGame extends OxygenGame with TapDetector {
     await Flame.device.setLandscape();
 
     final patternsList = await loadPatterns();
+    FlameAudio.bgm.initialize();
+
+    FlameAudio.bgm.load('music.mp3');
+
+    await FlameAudio.audioCache.loadAll([
+      'click.mp3',
+      'death.mp3',
+      'jump.mp3',
+    ]);
 
     world
       ..registerSystem(BackgroundSystem())
@@ -69,7 +79,10 @@ class FasterGame extends OxygenGame with TapDetector {
   void onTapCancel() => _revertIsTapped();
 
   @override
-  void onTapDown(TapDownInfo info) => _revertIsTapped();
+  void onTapDown(TapDownInfo info) {
+    FlameAudio.play('jump.mp3', volume: 0.8);
+    _revertIsTapped();
+  }
 
   @override
   void onTapUp(TapUpInfo info) => _revertIsTapped();
