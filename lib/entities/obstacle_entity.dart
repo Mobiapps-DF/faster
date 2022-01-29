@@ -12,11 +12,28 @@ const obstacleEntity = 'Obstacle';
 
 const obstacleSizes = [64.0, 92.0];
 
-Future<Entity> createObstacle(int number, int obstacleSize, FasterGame game) async {
+Future<Entity> createObstacle(
+  int number,
+  int obstacleSize,
+  FasterGame game,
+  {
+    required double positionX,
+    required double positionY,
+    required double deltaX,
+    required double deltaY,
+  }
+) async {
   Random random = Random();
+
+  // final xVariation = (random.nextDouble() * 2 - 1) * deltaX;
+  final yVariation = (random.nextDouble() * 2 - 1) * deltaY;
+
   return game.createEntity(
     name: '$obstacleEntity$number',
-    position: Vector2(game.size.x, random.nextDouble() * (game.size.y - obstacleSize)),
+    position: Vector2(
+      (game.size.x + positionX * game.size.x),
+      (positionY * (game.size.y - obstacleSizes[obstacleSize])) * (1 + yVariation),
+    ),
     size: Vector2.all(obstacleSizes[obstacleSize]),
   )
     ..add<SpriteComponent, SpriteInit>(

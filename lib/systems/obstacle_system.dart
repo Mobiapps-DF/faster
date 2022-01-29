@@ -6,19 +6,22 @@ import 'package:faster/components/velocity_component.dart';
 import 'package:faster/entities/game_session_entity.dart';
 import 'package:faster/entities/obstacle_entity.dart';
 import 'package:faster/faster_game.dart';
-import 'package:faster/utils/constants.dart';
 import 'package:faster/utils/game_status_helper.dart';
+import 'package:faster/utils/obstacle_patterns.dart';
 import 'package:flame_oxygen/flame_oxygen.dart';
 
-const maxObstacleApparitionDistance = 5; // whatever
+const maxObstacleApparitionTime = 5; //sec
 
 class ObstacleSystem extends System with UpdateSystem, GameRef<FasterGame> {
   Timer? timer;
   Query? _query;
-  double _elapsedTime = 0;
-  final int _obstacleNumber = 0;
+  double elapsedTime = 0;
+  int obstacleNumber = 0;
+  final PatternList patternList;
 
   DifficultyComponent? difficultyComponent;
+
+  ObstacleSystem(this.patternList);
 
   @override
   void init() {
@@ -40,23 +43,37 @@ class ObstacleSystem extends System with UpdateSystem, GameRef<FasterGame> {
     difficultyComponent ??= game!.world.entityManager.getEntityByName(gameSessionEntity)?.get<DifficultyComponent>();
 
     if (difficultyComponent != null && game != null && isPlaying(game!)) {
-      _elapsedTime += delta;
+      elapsedTime += delta;
 
-      double time = baseVelocity.x / difficultyComponent!.difficulty.toDouble();
-      double probability = _elapsedTime / time;
+      double probability = elapsedTime / maxObstacleApparitionTime;
 
       if (probability > Random(1).nextDouble()) {
-        _elapsedTime = 0;
-        createObstacle(_obstacleNumber, Random().nextInt(obstacleSizes.length), game!);
+        elapsedTime = 0;
+
+        final nextPattern = patternList.getNextPattern();
+
+        for (int index = 0; index < nextPattern.obstacles.length; index++) {
+          final obstacle = nextPattern.obstacles[index];
+
+          createObstacle(
+            obstacleNumber + index,
+            Random().nextInt(obstacleSizes.length),
+            game!,
+            positionX: obstacle.posX,
+            positionY: obstacle.posY,
+            deltaX: obstacle.deltaX,
+            deltaY: obstacle.deltaY,
+          );
+        }
       }
 
       for (final entity in _query?.entities ?? <Entity>[]) {
-        final velocity = entity.get<VelocityComponent>()!.velocity * difficultyComponent!.difficulty.toDouble();
+        final velocity = entity.get<VelocityComponent>()!.velocity;
         var position = entity.get<PositionComponent>()!.position;
         final size = entity.get<SizeComponent>()!.size;
 
         if (position.x > -size.x) {
-          position.sub(velocity * delta);
+          position.add((velocity * delta * (1 + log(difficultyComponent!.difficulty.toDouble()))));
         } else {
           entity.dispose();
         }
