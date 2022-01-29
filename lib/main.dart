@@ -6,8 +6,10 @@ import 'package:faster/layers/faster_home_layer.dart';
 import 'package:faster/layers/faster_paused_layer.dart';
 import 'package:faster/layers/faster_playing_layer.dart';
 import 'package:faster/utils/game_status_helper.dart';
+import 'package:faster/utils/user_preferences.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +20,10 @@ void main() async {
     path: 'assets/i18n',
     fallbackLocale: const Locale('en', 'US'),
     useOnlyLangCode: true,
-    child: const App(),
+    child: ChangeNotifierProvider(
+      create: (_) => UserPreferences(),
+      child: const App(),
+    ),
   ));
 }
 
@@ -35,7 +40,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    _game = FasterGame();
+    _game = FasterGame(saveScore: _saveScore);
     WidgetsBinding.instance!.addObserver(this);
   }
 
@@ -61,6 +66,9 @@ class _AppState extends State<App> with WidgetsBindingObserver {
       }
     }
   }
+
+  void _saveScore(double score) => Provider.of<UserPreferences>(context, listen: false)
+    .highScore = score;
 
   @override
   Widget build(BuildContext context) {

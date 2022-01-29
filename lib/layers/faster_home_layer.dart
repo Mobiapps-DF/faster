@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:faster/utils/user_preferences.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 typedef OnPressCallback = void Function();
 
@@ -12,6 +14,8 @@ class FasterHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final highScore = Provider.of<UserPreferences>(context).highScore;
+    
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
@@ -19,6 +23,12 @@ class FasterHome extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Image.asset('assets/images/faster.png'),
+          Text(
+            '${tr('labels.highScore')}: ${highScore.round()}',
+            style: const TextStyle(
+              fontSize: 32,
+            ),
+          ),
           GestureDetector(
             child: Container(
               width: 190,

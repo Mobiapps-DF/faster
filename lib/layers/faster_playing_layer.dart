@@ -1,3 +1,4 @@
+import 'package:faster/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 typedef OnPauseCallback = void Function();
@@ -16,7 +17,7 @@ class FasterPlaying extends StatelessWidget {
         top: 0,
         right: 0,
         child: IconButton(
-          icon: const ImageIcon(AssetImage("assets/images/pause.png"), color: Color(0xff1ea7e1)),
+          icon: const ImageIcon(AssetImage("assets/images/pause.png"), color: appLightBlue),
           onPressed: () => onPaused(),
         ),
       )
