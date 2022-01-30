@@ -3,6 +3,7 @@ import 'package:faster/components/parallax_component.dart';
 import 'package:faster/faster_game.dart';
 import 'package:faster/systems/background_system.dart';
 import 'package:faster/utils/constants.dart';
+import 'package:faster/utils/parallax_backgrounds/parallax_backgrounds.dart';
 import 'package:flame/game.dart';
 import 'package:flame/parallax.dart';
 import 'package:flame_oxygen/flame_oxygen.dart';

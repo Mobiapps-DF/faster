@@ -221,24 +221,24 @@ packages:
   flame:
     dependency: "direct main"
     description:
-      path: "dependencies/flame/packages/flame"
-      relative: true
-    source: path
-    version: "1.0.0-releasecandidate.16"
+      name: flame
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   flame_audio:
     dependency: "direct main"
     description:
-      path: "dependencies/flame/packages/flame_audio"
-      relative: true
-    source: path
-    version: "1.0.0-rc.15"
+      name: flame_audio
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   flame_oxygen:
     dependency: "direct main"
     description:
-      path: "dependencies/flame/packages/flame_oxygen"
-      relative: true
-    source: path
-    version: "0.1.0-releasecandidate.13"
+      name: flame_oxygen
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.1"
   flutter:
     dependency: "direct main"
     description: flutter
