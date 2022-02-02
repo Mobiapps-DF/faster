@@ -8,8 +8,8 @@ import 'package:flame/extensions.dart';
 import 'package:flame_oxygen/flame_oxygen.dart';
 
 const String playerEntity = 'Player';
-const double playerSizeX = 60;
-const double playerSizeY = 80;
+const double playerSizeYRatio = 0.25;
+const double playerSizeXRatio = 0.75;
 
 Future<Entity> createPlayer(FasterGame game) async {
   final runSprites = [
@@ -21,10 +21,16 @@ Future<Entity> createPlayer(FasterGame game) async {
     await game.loadSprite('character_maleAdventurer_jump.png'),
   ];
 
+  final playerSizeY = game.world.game.size.y * playerSizeYRatio;
+  final playerSizeX = playerSizeY * playerSizeXRatio;
+
   return game.createEntity(
     name: playerEntity,
     position: Vector2(50, game.world.game.size.y - playerSizeY),
-    size: Vector2(playerSizeX, playerSizeY),
+    size: Vector2(
+      playerSizeX,
+      playerSizeY,
+    ),
   )
     ..add<AnimatedSpritesComponent, List<SpriteAnimation>>([
       SpriteAnimation.spriteList(runSprites, stepTime: 0.15),

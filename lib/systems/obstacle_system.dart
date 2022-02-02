@@ -18,6 +18,7 @@ class ObstacleSystem extends System with UpdateSystem, GameRef<FasterGame> {
   double elapsedTime = 0;
   int obstacleNumber = 0;
   final PatternList patternList;
+  bool Function() _canRenderNewPattern = () => true;
 
   DifficultyComponent? difficultyComponent;
 
@@ -44,8 +45,11 @@ class ObstacleSystem extends System with UpdateSystem, GameRef<FasterGame> {
 
     if (difficultyComponent != null && game != null && isPlaying(game!)) {
       elapsedTime += delta;
+      double probability = 0;
 
-      double probability = elapsedTime / maxObstacleApparitionTime;
+      if (_canRenderNewPattern()) {
+        probability = elapsedTime / maxObstacleApparitionTime;
+      }
 
       if (probability > Random(1).nextDouble()) {
         elapsedTime = 0;
@@ -57,13 +61,17 @@ class ObstacleSystem extends System with UpdateSystem, GameRef<FasterGame> {
 
           createObstacle(
             obstacleNumber + index,
-            Random().nextInt(obstacleSizes.length),
+            Random().nextInt(obstacleSizeFactors.length),
             game!,
             positionX: obstacle.posX,
             positionY: obstacle.posY,
             deltaX: obstacle.deltaX,
             deltaY: obstacle.deltaY,
-          );
+          ).then((entity) {
+            if (index == 0) {
+              _canRenderNewPattern = () => !entity.alive;
+            }
+          });
         }
       }
 

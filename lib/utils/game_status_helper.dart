@@ -33,7 +33,7 @@ setPlaying(FasterGame game) {
   Entity? entity = game.world.entityManager.getEntityByName(playerEntity);
   if (entity != null) {
     entity.get<VelocityComponent>()!.reset();
-    entity.get<PositionComponent>()!.position.setFrom(Vector2(50, game.world.game.size.y - playerSizeY));
+    entity.get<PositionComponent>()!.position.setFrom(Vector2(50, game.world.game.size.y));
     entity.get<TapInputComponent>()!.value = false;
   }
 }
