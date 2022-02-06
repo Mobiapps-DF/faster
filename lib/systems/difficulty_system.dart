@@ -7,7 +7,7 @@ const timeBeforeIncrease = 15;
 
 class DifficultySystem extends System with UpdateSystem, GameRef<FasterGame> {
   Query? _query;
-  double elapsedTime = 0;
+  // double elapsedTime = 0;
 
   @override
   void init() {
@@ -23,13 +23,13 @@ class DifficultySystem extends System with UpdateSystem, GameRef<FasterGame> {
   @override
   void update(double delta) {
     if (game != null && isPlaying(game!)) {
-      elapsedTime += delta;
-      if (elapsedTime > timeBeforeIncrease) {
-        elapsedTime = 0;
+      // elapsedTime += delta;
+      // if (elapsedTime > timeBeforeIncrease) {
+      //   elapsedTime = 0;
         for (final entity in _query?.entities ?? <Entity>[]) {
-          entity.get<DifficultyComponent>()?.difficulty += 1;
+          entity.get<DifficultyComponent>()?.difficulty += delta / timeBeforeIncrease;
         }
-      }
+    //   }
     }
   }
 }

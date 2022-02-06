@@ -15,14 +15,12 @@ const obstacleSizes = [64.0, 92.0];
 Future<Entity> createObstacle(
   int number,
   int obstacleSize,
-  FasterGame game,
-  {
-    required double positionX,
-    required double positionY,
-    required double deltaX,
-    required double deltaY,
-  }
-) async {
+  FasterGame game, {
+  required double positionX,
+  required double positionY,
+  required double deltaX,
+  required double deltaY,
+}) async {
   Random random = Random();
 
   // final xVariation = (random.nextDouble() * 2 - 1) * deltaX;

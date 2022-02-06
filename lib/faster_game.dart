@@ -6,7 +6,6 @@ import 'package:faster/components/parallax_component.dart';
 import 'package:faster/components/score_component.dart';
 import 'package:faster/components/tap_input_component.dart';
 import 'package:faster/components/velocity_component.dart';
-import 'package:faster/entities/background_entity.dart';
 import 'package:faster/entities/game_session_entity.dart';
 import 'package:faster/entities/player_entity.dart';
 import 'package:faster/systems/animated_sprite_system.dart';
@@ -20,8 +19,10 @@ import 'package:faster/systems/jump_system.dart';
 import 'package:faster/systems/obstacle_system.dart';
 import 'package:faster/systems/score_system.dart';
 import 'package:faster/systems/sprite_system.dart';
+import 'package:faster/utils/constants.dart';
 import 'package:faster/utils/game_status_helper.dart';
 import 'package:faster/utils/obstacle_patterns.dart';
+import 'package:faster/utils/parallax_backgrounds/parallax_backgrounds.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/input.dart';
 import 'package:flame/parallax.dart';
@@ -31,7 +32,7 @@ import 'package:flame_oxygen/flame_oxygen.dart';
 class FasterGame extends OxygenGame with TapDetector {
   final SetDoubleCallback saveScore;
 
-  FasterGame({ required this.saveScore });
+  FasterGame({required this.saveScore});
 
   @override
   Future<void> init() async {
@@ -49,8 +50,10 @@ class FasterGame extends OxygenGame with TapDetector {
       'jump.mp3',
     ]);
 
+    var parallaxBackgrounds = await ParallaxBackgrounds.load(baseVelocity);
+
     world
-      ..registerSystem(BackgroundSystem())
+      ..registerSystem(BackgroundSystem(parallaxBackgrounds))
       ..registerSystem(SpriteSystem())
       ..registerSystem(GameStatusSystem())
       ..registerSystem(AnimatedSpriteSystem())
@@ -64,7 +67,7 @@ class FasterGame extends OxygenGame with TapDetector {
       ..registerComponent<VelocityComponent, Vector2>(() => VelocityComponent())
       ..registerComponent<TapInputComponent, bool>(() => TapInputComponent())
       ..registerComponent<ParallaxComponent, Parallax>(() => ParallaxComponent())
-      ..registerComponent<DifficultyComponent, int>(() => DifficultyComponent())
+      ..registerComponent<DifficultyComponent, double>(() => DifficultyComponent())
       ..registerComponent<GameStatusComponent, GameStatus>(() => GameStatusComponent())
       ..registerComponent<AnimatedSpritesComponent, List<SpriteAnimation>>(() => AnimatedSpritesComponent())
       ..registerComponent<HitBoxComponent, void>(() => HitBoxComponent())
@@ -72,7 +75,6 @@ class FasterGame extends OxygenGame with TapDetector {
 
     createGameSession(this);
     await createPlayer(this);
-    await createBackground(this);
   }
 
   @override

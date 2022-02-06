@@ -1,10 +1,10 @@
 import 'package:flame_oxygen/flame_oxygen.dart';
 
-class DifficultyComponent extends Component<int> {
-  late int difficulty;
+class DifficultyComponent extends Component<double> {
+  late double difficulty;
 
   @override
-  void init([int? data]) {
+  void init([double? data]) {
     difficulty = data ?? 1;
   }
 
