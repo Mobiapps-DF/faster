@@ -6,5 +6,5 @@ import 'package:flame_oxygen/flame_oxygen.dart';
 const gameSessionEntity = 'GameSession';
 
 Entity createGameSession(FasterGame game) => game.world.entityManager.createEntity(gameSessionEntity)
-  ..add<DifficultyComponent, int>(1)
+  ..add<DifficultyComponent, double>(1)
   ..add<GameStatusComponent, GameStatus>();

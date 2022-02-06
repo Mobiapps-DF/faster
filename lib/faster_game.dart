@@ -67,7 +67,7 @@ class FasterGame extends OxygenGame with TapDetector {
       ..registerComponent<VelocityComponent, Vector2>(() => VelocityComponent())
       ..registerComponent<TapInputComponent, bool>(() => TapInputComponent())
       ..registerComponent<ParallaxComponent, Parallax>(() => ParallaxComponent())
-      ..registerComponent<DifficultyComponent, int>(() => DifficultyComponent())
+      ..registerComponent<DifficultyComponent, double>(() => DifficultyComponent())
       ..registerComponent<GameStatusComponent, GameStatus>(() => GameStatusComponent())
       ..registerComponent<AnimatedSpritesComponent, List<SpriteAnimation>>(() => AnimatedSpritesComponent())
       ..registerComponent<HitBoxComponent, void>(() => HitBoxComponent())
