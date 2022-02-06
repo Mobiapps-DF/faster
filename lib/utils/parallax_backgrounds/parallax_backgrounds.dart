@@ -18,8 +18,8 @@ class ParallaxBackgrounds {
 
   static Future<ParallaxBackgrounds> load(Vector2 baseVelocity) async {
     List<BackgroundLayer> list = [];
-    list.add(await BackgroundLayer.load(backgrounds, Vector2(1.8, 1.0)));
-    list.add(await BackgroundLayer.load(['groundGrass.png'], Vector2(1.0, 1.0)));
+    list.add(await BackgroundLayer.load(backgrounds, Vector2(1.0, 1.0)));
+    list.add(await BackgroundLayer.load(['groundGrass.png'], Vector2(1.8, 1.0)));
     return ParallaxBackgrounds(list, baseVelocity);
   }
 
