@@ -4,7 +4,9 @@ import 'package:faster/components/difficulty_component.dart';
 import 'package:faster/components/game_status_component.dart';
 import 'package:faster/entities/game_session_entity.dart';
 import 'package:faster/faster_game.dart';
+import 'package:faster/utils/constants.dart';
 import 'package:faster/utils/parallax_backgrounds/parallax_backgrounds.dart';
+import 'package:flame/components.dart';
 import 'package:flame_oxygen/flame_oxygen.dart';
 
 const updateBackgroundTimeout = 10; /// seconds
@@ -30,6 +32,8 @@ class BackgroundSystem extends System with UpdateSystem, RenderSystem, GameRef<F
       _difficultyComponent ??= game!.world.entityManager.getEntityByName(gameSessionEntity)?.get<DifficultyComponent>();
 
       if (_difficultyComponent != null) {
+        _backgrounds.velocity =
+            Vector2(baseVelocity.x * _difficultyComponent!.difficulty, 0);
         if (_elapsedTime > updateBackgroundTimeout) {
           _elapsedTime = 0;
           _currentBackground++;
