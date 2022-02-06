@@ -10,11 +10,8 @@ dependencies:
   flutter:
     sdk: flutter
   flame: ^1.0.0
-#    path: ../flame/packages/flame
   flame_audio: ^1.0.0
-#    path: ../flame/packages/flame_audio
   flame_oxygen: ^0.1.1
-#    path: ../flame/packages/flame_oxygen
   easy_localization: ^3.0.0
   json_annotation: ^4.4.0
   json_serializable: ^6.1.4
