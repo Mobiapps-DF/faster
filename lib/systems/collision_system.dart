@@ -1,3 +1,4 @@
+import 'package:faster/components/animated_sprites_component.dart';
 import 'package:faster/components/game_status_component.dart';
 import 'package:faster/components/hitbox_component.dart';
 import 'package:faster/components/velocity_component.dart';
@@ -9,6 +10,8 @@ import 'package:flame_oxygen/flame_oxygen.dart';
 
 class CollisionSystem extends System with UpdateSystem, GameRef<FasterGame> {
   Query? _query;
+
+  Entity? _player;
 
   @override
   void init() {
@@ -29,10 +32,15 @@ class CollisionSystem extends System with UpdateSystem, GameRef<FasterGame> {
   @override
   void update(double delta) {
     if (game != null && isPlaying(game!)) {
-      final playerHitBox = game!.world.entityManager.getEntityByName(playerEntity)!.get<HitBoxComponent>()!.value!;
+      _player ??= game!.world.entityManager.getEntityByName(playerEntity);
+
+      final playerHitBox = _player!.get<HitBoxComponent>()!.value!;
 
       for (final entity in _query?.entities ?? <Entity>[]) {
         if (entity.get<HitBoxComponent>()!.value!.overlaps(playerHitBox)) {
+          final animatedSprites = _player!.get<AnimatedSpritesComponent>()!;
+          animatedSprites.activeAnimation = deathAnimation;
+
           game!.world.entityManager.getEntityByName(gameSessionEntity)!.get<GameStatusComponent>()!.status =
               GameStatus.dead;
         }

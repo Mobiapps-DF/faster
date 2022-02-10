@@ -3,6 +3,7 @@ import 'package:faster/components/game_status_component.dart';
 import 'package:faster/components/tap_input_component.dart';
 import 'package:faster/components/velocity_component.dart';
 import 'package:faster/entities/game_session_entity.dart';
+import 'package:faster/entities/player_entity.dart';
 import 'package:faster/faster_game.dart';
 import 'package:flame/extensions.dart';
 import 'package:flame_oxygen/flame_oxygen.dart';
@@ -47,10 +48,10 @@ class JumpSystem extends System with UpdateSystem, GameRef<FasterGame> {
 
         // Tap detection
         if (isTapped) {
-          animatedSprites.activeAnimation = 1;
+          animatedSprites.activeAnimation = jumpAnimation;
           currentAcceleration = _jumpForce;
         } else {
-          animatedSprites.activeAnimation = 0;
+          animatedSprites.activeAnimation = runAnimation;
           currentAcceleration = _gravity;
         }
         // We compute the delta that will be added to position on next frame

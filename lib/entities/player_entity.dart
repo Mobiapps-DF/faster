@@ -8,8 +8,13 @@ import 'package:flame/extensions.dart';
 import 'package:flame_oxygen/flame_oxygen.dart';
 
 const String playerEntity = 'Player';
+
 const double playerSizeYRatio = 0.25;
 const double playerSizeXRatio = 0.75;
+
+const int runAnimation = 0;
+const int jumpAnimation = 1;
+const int deathAnimation = 2;
 
 Future<Entity> createPlayer(FasterGame game) async {
   final runSprites = [
@@ -19,6 +24,9 @@ Future<Entity> createPlayer(FasterGame game) async {
   ];
   final jumpSprites = [
     await game.loadSprite('character_maleAdventurer_jump.png'),
+  ];
+  final deathSprites = [
+    await game.loadSprite('character_maleAdventurer_shoveBack.png'),
   ];
 
   final playerSizeY = game.world.game.size.y * playerSizeYRatio;
@@ -35,6 +43,7 @@ Future<Entity> createPlayer(FasterGame game) async {
     ..add<AnimatedSpritesComponent, List<SpriteAnimation>>([
       SpriteAnimation.spriteList(runSprites, stepTime: 0.15),
       SpriteAnimation.spriteList(jumpSprites, stepTime: 0.15),
+      SpriteAnimation.spriteList(deathSprites, stepTime: 0.15),
     ])
     ..add<VelocityComponent, Vector2>(
       Vector2(0, 0),
