@@ -32,6 +32,8 @@ import 'package:flame_oxygen/flame_oxygen.dart';
 class FasterGame extends OxygenGame with TapDetector {
   final SetDoubleCallback saveScore;
 
+  dynamic _player;
+
   FasterGame({required this.saveScore});
 
   @override
@@ -44,11 +46,7 @@ class FasterGame extends OxygenGame with TapDetector {
 
     FlameAudio.bgm.load('music.mp3');
 
-    await FlameAudio.audioCache.loadAll([
-      'click.mp3',
-      'death.mp3',
-      'jump.mp3',
-    ]);
+    await FlameAudio.audioCache.loadAll(['click.mp3', 'death.mp3', 'jump.wav']);
 
     var parallaxBackgrounds = await ParallaxBackgrounds.load(baseVelocity);
 
@@ -76,7 +74,6 @@ class FasterGame extends OxygenGame with TapDetector {
       ..registerComponent<ScoreComponent, double>(() => ScoreComponent());
 
     createGameSession(this);
-    // createParticles(this);
     await createPlayer(this);
   }
 
@@ -85,7 +82,7 @@ class FasterGame extends OxygenGame with TapDetector {
 
   @override
   void onTapDown(TapDownInfo info) {
-    FlameAudio.play('jump.mp3', volume: 0.8);
+    FlameAudio.play('jump.wav', volume: 0.8).then((player) => _player = player);
     _revertIsTapped();
   }
 
@@ -98,5 +95,6 @@ class FasterGame extends OxygenGame with TapDetector {
 
       player?.get<TapInputComponent>()!.revert();
     }
+    _player?.stop();
   }
 }
