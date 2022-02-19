@@ -5,6 +5,7 @@ import 'package:faster/components/difficulty_component.dart';
 import 'package:faster/components/velocity_component.dart';
 import 'package:faster/entities/game_session_entity.dart';
 import 'package:faster/entities/obstacle_entity.dart';
+import 'package:faster/entities/particles_entity.dart';
 import 'package:faster/faster_game.dart';
 import 'package:faster/utils/game_status_helper.dart';
 import 'package:faster/utils/obstacle_patterns.dart';
@@ -17,10 +18,9 @@ class ObstacleSystem extends System with UpdateSystem, GameRef<FasterGame> {
   Query? _query;
   double elapsedTime = 0;
   int obstacleNumber = 0;
-  final PatternList patternList;
-  bool Function() _canRenderNewPattern = () => true;
+  DifficultyComponent? _difficultyComponent;
 
-  DifficultyComponent? difficultyComponent;
+  final PatternList patternList;
 
   ObstacleSystem(this.patternList);
 
@@ -41,9 +41,9 @@ class ObstacleSystem extends System with UpdateSystem, GameRef<FasterGame> {
 
   @override
   void update(double delta) {
-    difficultyComponent ??= game!.world.entityManager.getEntityByName(gameSessionEntity)?.get<DifficultyComponent>();
+    _difficultyComponent ??= game!.world.entityManager.getEntityByName(gameSessionEntity)?.get<DifficultyComponent>();
 
-    if (difficultyComponent != null && game != null && isPlaying(game!)) {
+    if (_difficultyComponent != null && game != null && isPlaying(game!)) {
       elapsedTime += delta;
       double probability = 0;
 
@@ -67,25 +67,26 @@ class ObstacleSystem extends System with UpdateSystem, GameRef<FasterGame> {
             positionY: obstacle.posY,
             deltaX: obstacle.deltaX,
             deltaY: obstacle.deltaY,
-          ).then((entity) {
-            if (index == 0) {
-              _canRenderNewPattern = () => !entity.alive;
-            }
-          });
+          );
         }
+        obstacleNumber++;
       }
 
       for (final entity in _query?.entities ?? <Entity>[]) {
-        final velocity = entity.get<VelocityComponent>()!.velocity;
-        var position = entity.get<PositionComponent>()!.position;
-        final size = entity.get<SizeComponent>()!.size;
+        if (entity.name != particlesEntity) {
+          final velocity = entity.get<VelocityComponent>()!.velocity;
+          var position = entity.get<PositionComponent>()!.position;
+          final size = entity.get<SizeComponent>()!.size;
 
-        if (position.x > -size.x) {
-          position.add((velocity * delta * (1 + log(difficultyComponent!.difficulty.toDouble()))));
-        } else {
-          entity.dispose();
+          if (position.x > -size.x) {
+            position.add((velocity * delta * (1 + log(_difficultyComponent!.difficulty.toDouble()))));
+          } else {
+            entity.dispose();
+          }
         }
       }
     }
   }
+
+  bool _canRenderNewPattern() => _query?.entities.isEmpty ?? true;
 }
