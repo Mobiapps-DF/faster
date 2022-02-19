@@ -1,8 +1,11 @@
+import 'dart:math';
+
 import 'package:faster/components/animated_sprites_component.dart';
 import 'package:faster/components/game_status_component.dart';
 import 'package:faster/components/tap_input_component.dart';
 import 'package:faster/components/velocity_component.dart';
 import 'package:faster/entities/game_session_entity.dart';
+import 'package:faster/entities/particles_entity.dart';
 import 'package:faster/entities/player_entity.dart';
 import 'package:faster/faster_game.dart';
 import 'package:flame/extensions.dart';
@@ -11,6 +14,7 @@ import 'package:flame_oxygen/flame_oxygen.dart';
 class JumpSystem extends System with UpdateSystem, GameRef<FasterGame> {
   final _gravity = Vector2(0, 1000);
   final _jumpForce = Vector2(0, -1500);
+  final Random _rnd = Random();
   Query? _query;
 
   @override
@@ -50,6 +54,7 @@ class JumpSystem extends System with UpdateSystem, GameRef<FasterGame> {
         if (isTapped) {
           animatedSprites.activeAnimation = jumpAnimation;
           currentAcceleration = _jumpForce;
+          createParticles(game!, Vector2(position.x + _rnd.nextDouble() * size.x / 2, position.y + size.y));
         } else {
           animatedSprites.activeAnimation = runAnimation;
           currentAcceleration = _gravity;
