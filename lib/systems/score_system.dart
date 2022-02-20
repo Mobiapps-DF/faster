@@ -22,9 +22,11 @@ const double scoreMultiplier = 0.25;
 
 typedef SetDoubleCallback = void Function(double);
 
-class ScoreSystem extends System with UpdateSystem, RenderSystem, GameRef<FasterGame> {
+class ScoreSystem extends System
+    with UpdateSystem, RenderSystem, GameRef<FasterGame> {
   Query? _query;
   final SetDoubleCallback saveScore;
+  GameStatus? status;
 
   ScoreSystem({required this.saveScore});
 
@@ -37,9 +39,13 @@ class ScoreSystem extends System with UpdateSystem, RenderSystem, GameRef<Faster
 
   @override
   void update(double delta) {
-    GameStatus? status =
-        game!.world.entityManager.getEntityByName(gameSessionEntity)?.get<GameStatusComponent>()?.status;
-    final scoreComponent = game!.world.entityManager.getEntityByName(playerEntity)!.get<ScoreComponent>()!;
+    status = game!.world.entityManager
+        .getEntityByName(gameSessionEntity)
+        ?.get<GameStatusComponent>()
+        ?.status;
+    final scoreComponent = game!.world.entityManager
+        .getEntityByName(playerEntity)!
+        .get<ScoreComponent>()!;
 
     if (status == GameStatus.playing) {
       final difficulty = game!.world.entityManager
@@ -62,10 +68,12 @@ class ScoreSystem extends System with UpdateSystem, RenderSystem, GameRef<Faster
 
   @override
   void render(Canvas canvas) {
-    for (final entity in _query?.entities ?? <Entity>[]) {
-      final score = entity.get<ScoreComponent>()?.roundedScore ?? 0;
+    if (status == GameStatus.playing) {
+      for (final entity in _query?.entities ?? <Entity>[]) {
+        final score = entity.get<ScoreComponent>()?.roundedScore ?? 0;
 
-      textPaint.render(canvas, '$score', Vector2(20, 10));
+        textPaint.render(canvas, '$score', Vector2(20, 10));
+      }
     }
   }
 
