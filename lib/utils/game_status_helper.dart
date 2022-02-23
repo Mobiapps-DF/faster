@@ -45,6 +45,20 @@ setPaused(FasterGame game) {
   }
 }
 
+setCredits(FasterGame game) {
+  Entity? gameEntity = game.world.entityManager.getEntityByName(gameSessionEntity);
+  if (gameEntity != null) {
+    gameEntity.get<GameStatusComponent>()?.status = GameStatus.credits;
+  }
+}
+
+setHome(FasterGame game) {
+  Entity? gameEntity = game.world.entityManager.getEntityByName(gameSessionEntity);
+  if (gameEntity != null) {
+    gameEntity.get<GameStatusComponent>()?.status = GameStatus.home;
+  }
+}
+
 unsetPause(FasterGame game) {
   Entity? gameEntity = game.world.entityManager.getEntityByName(gameSessionEntity);
   if (gameEntity != null) {

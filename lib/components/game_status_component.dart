@@ -4,7 +4,8 @@ enum GameStatus {
   home,
   playing,
   dead,
-  paused
+  paused,
+  credits
 }
 
 class GameStatusComponent extends Component<GameStatus> {
