@@ -69,7 +69,8 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   }
 
   void _saveScore(double score) => Provider.of<UserPreferences>(context, listen: false)
-    .highScore = score;
+    ..highScore = score
+    ..lastScore = score;
 
   @override
   Widget build(BuildContext context) {

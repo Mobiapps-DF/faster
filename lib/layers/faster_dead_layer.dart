@@ -17,6 +17,7 @@ class FasterDead extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final highScore = Provider.of<UserPreferences>(context).highScore;
+    final lastScore = Provider.of<UserPreferences>(context).lastScore;
 
     return GestureDetector(
         behavior: HitTestBehavior.opaque,
@@ -38,9 +39,15 @@ class FasterDead extends StatelessWidget {
                     ),
                   ),
                   Text(
+                    '${tr('labels.currentScore')}: ${lastScore.round()}',
+                    style: const TextStyle(
+                      fontSize: 32, color: lastScoreColor,
+                    ),
+                  ),
+                  Text(
                     '${tr('labels.highScore')}: ${highScore.round()}',
                     style: const TextStyle(
-                      fontSize: 32,
+                      fontSize: 32, color: highScoreColor,
                     ),
                   ),
                   Text(

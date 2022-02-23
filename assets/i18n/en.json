@@ -6,6 +6,7 @@
   "labels": {
     "deadPlayer": "You are dead!",
     "paused": "Paused",
-    "highScore": "High Score"
+    "highScore": "High Score",
+    "currentScore": "Score"
   }
 }
