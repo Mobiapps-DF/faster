@@ -6,6 +6,14 @@
   "labels": {
     "deadPlayer": "You are dead!",
     "paused": "Paused",
-    "highScore": "High Score"
+    "highScore": "High Score",
+    "thanks": "Thanks",
+    "made": "Made with Flame",
+    "credits" : "Credits",
+    "guillaume": "Caze-Francois Guillaume",
+    "samuel": "Ebebenge Samuel",
+    "maxime": "Bizeray Maxime",
+    "simon": "Bernardin Simon",
+    "lamine": "Diakite Lamine"
   }
 }

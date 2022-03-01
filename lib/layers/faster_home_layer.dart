@@ -26,10 +26,10 @@ class FasterHome extends StatelessWidget {
           Container(
             margin: const EdgeInsets.all(25),
             child: TextButton(
-              child: const Text(
-                'Crédits',
-                style: TextStyle(
-                    fontSize: 20.0
+              child: Text(
+                tr('labels.credits'),
+                style: const TextStyle(
+                    fontSize: 22.0
                 ),
               ),
               onPressed: onCreditsPressed,

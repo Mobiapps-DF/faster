@@ -6,6 +6,14 @@
   "labels": {
     "deadPlayer": "Vous êtes mort !",
     "paused": "Pause",
-    "highScore": "Record"
+    "highScore": "Record",
+    "thanks": "Remerciements",
+    "made": "Fait avec FLame",
+    "credits": "Crédits",
+    "guillaume": "Caze-Francois Guillaume",
+    "samuel": "Ebebenge Samuel",
+    "maxime": "Bizeray Maxime",
+    "simon": "Bernardin Simon",
+    "lamine": "Diakite Lamine"
   }
 }
