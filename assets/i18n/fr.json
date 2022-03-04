@@ -7,13 +7,13 @@
     "deadPlayer": "Vous êtes mort !",
     "paused": "Pause",
     "highScore": "Record",
-    "thanks": "Remerciements",
+    "thanks": "L'équipe",
     "made": "Fait avec FLame",
     "credits": "Crédits",
-    "guillaume": "Caze-Francois Guillaume",
-    "samuel": "Ebebenge Samuel",
-    "maxime": "Bizeray Maxime",
-    "simon": "Bernardin Simon",
-    "lamine": "Diakite Lamine"
+    "guillaume": "Guillaume Caze-Francois",
+    "samuel": "Samuel Ebebenge",
+    "maxime": "Maxime Bizeray",
+    "simon": "Simon Bernardin",
+    "lamine": "Lamine Diakite"
   }
 }

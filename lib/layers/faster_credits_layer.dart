@@ -4,15 +4,29 @@ import 'package:flutter/material.dart';
 
 typedef OnPressCallBack = void Function();
 
-class FasterCredits extends StatelessWidget {
+class FasterCredits extends StatefulWidget {
   static String name = "faster_credits";
+
   final OnPressCallBack onPressed;
 
   const FasterCredits(this.onPressed, {Key? key}) : super(key: key);
 
   @override
+  State<FasterCredits> createState() => _FasterCreditState();
+}
+
+class _FasterCreditState extends State<FasterCredits> {
+
+  void _returnHome() {
+    setState(() {
+      widget.onPressed();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       child: SizedBox(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
@@ -34,6 +48,7 @@ class FasterCredits extends StatelessWidget {
                       style: const TextStyle(fontSize: 18.0)),
                   Text(tr('labels.lamine'),
                       style: const TextStyle(fontSize: 18.0)),
+                  const SizedBox(height: 10),
                 ],
               ),
               Column(
@@ -53,7 +68,9 @@ class FasterCredits extends StatelessWidget {
               ),
             ],
           )),
-      onTap: onPressed,
+      onTap: () {
+        _returnHome();
+      },
     );
   }
 }

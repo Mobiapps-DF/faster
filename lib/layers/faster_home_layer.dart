@@ -59,7 +59,7 @@ class FasterHome extends StatelessWidget {
                 ),
               ),
             ),
-            onTap: onCreditsPressed,
+            onTap: onPlayPressed,
           )
         ],
       ),
