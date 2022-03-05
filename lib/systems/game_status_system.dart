@@ -1,5 +1,6 @@
 import 'package:faster/components/game_status_component.dart';
 import 'package:faster/faster_game.dart';
+import 'package:faster/layers/faster_credits_layer.dart';
 import 'package:faster/layers/faster_dead_layer.dart';
 import 'package:faster/layers/faster_home_layer.dart';
 import 'package:faster/layers/faster_paused_layer.dart';
@@ -50,6 +51,9 @@ class GameStatusSystem extends System with UpdateSystem, GameRef<FasterGame> {
       case GameStatus.paused:
         game!.overlays.remove(FasterPaused.name);
         break;
+      case GameStatus.credits:
+        game!.overlays.remove(FasterCredits.name);
+        break;
     }
   }
 
@@ -70,6 +74,9 @@ class GameStatusSystem extends System with UpdateSystem, GameRef<FasterGame> {
       case GameStatus.paused:
         FlameAudio.bgm.stop();
         game!.overlays.add(FasterPaused.name);
+        break;
+      case GameStatus.credits:
+        game!.overlays.add(FasterCredits.name);
         break;
     }
   }

@@ -7,6 +7,14 @@
     "deadPlayer": "You are dead!",
     "paused": "Paused",
     "highScore": "High Score",
+    "thanks": "Teams",
+    "made": "Made with Flame",
+    "credits" : "Credits",
+    "guillaume": "Guillaume Caze-Francois",
+    "samuel": "Samuel Ebebenge",
+    "maxime": "Maxime Bizeray",
+    "simon": "Simon Bernardin",
+    "lamine": "Lamine Diakite",
     "currentScore": "Score"
   }
 }

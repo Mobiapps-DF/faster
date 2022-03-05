@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:faster/components/game_status_component.dart';
 import 'package:faster/faster_game.dart';
+import 'package:faster/layers/faster_credits_layer.dart';
 import 'package:faster/layers/faster_dead_layer.dart';
 import 'package:faster/layers/faster_home_layer.dart';
 import 'package:faster/layers/faster_paused_layer.dart';
@@ -86,8 +87,15 @@ class _AppState extends State<App> with WidgetsBindingObserver {
           overlayBuilderMap: {
             FasterHome.name: (BuildContext context, FasterGame game) {
               return FasterHome(() {
+                setCredits(game);
+              }, () {
                 FlameAudio.play('click.mp3');
                 setPlaying(game);
+              });
+            },
+            FasterCredits.name: (BuildContext context, FasterGame game) {
+              return FasterCredits(() {
+                setHome(game);
               });
             },
             FasterPlaying.name: (BuildContext context, FasterGame game) {

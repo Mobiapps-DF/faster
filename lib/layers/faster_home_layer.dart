@@ -8,9 +8,10 @@ typedef OnPressCallback = void Function();
 class FasterHome extends StatelessWidget {
   static String name = 'faster_home';
 
-  final OnPressCallback onPressed;
+  final OnPressCallback onCreditsPressed;
+  final OnPressCallback onPlayPressed;
 
-  const FasterHome(this.onPressed, {Key? key}) : super(key: key);
+  const FasterHome(this.onCreditsPressed,this.onPlayPressed, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +23,18 @@ class FasterHome extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          Container(
+            margin: const EdgeInsets.all(25),
+            child: TextButton(
+              child: Text(
+                tr('labels.credits'),
+                style: const TextStyle(
+                    fontSize: 22.0
+                ),
+              ),
+              onPressed: onCreditsPressed,
+            ),
+          ),
           Image.asset('assets/images/faster.png'),
           Text(
             '${tr('labels.highScore')}: ${highScore.round()}',
@@ -46,7 +59,7 @@ class FasterHome extends StatelessWidget {
                 ),
               ),
             ),
-            onTap: onPressed,
+            onTap: onPlayPressed,
           )
         ],
       ),

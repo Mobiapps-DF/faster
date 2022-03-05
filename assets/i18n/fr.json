@@ -7,6 +7,14 @@
     "deadPlayer": "Vous êtes mort !",
     "paused": "Pause",
     "highScore": "Record",
+    "thanks": "L'équipe",
+    "made": "Fait avec FLame",
+    "credits": "Crédits",
+    "guillaume": "Guillaume Caze-Francois",
+    "samuel": "Samuel Ebebenge",
+    "maxime": "Maxime Bizeray",
+    "simon": "Simon Bernardin",
+    "lamine": "Lamine Diakite",
     "currentScore": "Score"
   }
 }
