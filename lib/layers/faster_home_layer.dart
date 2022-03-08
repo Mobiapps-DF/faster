@@ -11,12 +11,12 @@ class FasterHome extends StatelessWidget {
   final OnPressCallback onCreditsPressed;
   final OnPressCallback onPlayPressed;
 
-  const FasterHome(this.onCreditsPressed,this.onPlayPressed, {Key? key}) : super(key: key);
+  const FasterHome(this.onCreditsPressed, this.onPlayPressed, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final highScore = Provider.of<UserPreferences>(context).highScore;
-    
+
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
@@ -24,13 +24,11 @@ class FasterHome extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Container(
-            margin: const EdgeInsets.all(25),
+            margin: const EdgeInsets.all(12),
             child: TextButton(
               child: Text(
                 tr('labels.credits'),
-                style: const TextStyle(
-                    fontSize: 22.0
-                ),
+                style: const TextStyle(fontSize: 22.0),
               ),
               onPressed: onCreditsPressed,
             ),
@@ -52,10 +50,7 @@ class FasterHome extends StatelessWidget {
               child: Center(
                 child: Text(
                   tr('actions.play'),
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 48
-                  ),
+                  style: const TextStyle(color: Colors.white, fontSize: 48),
                 ),
               ),
             ),
