@@ -17,6 +17,7 @@ import 'package:faster/systems/game_status_system.dart';
 import 'package:faster/systems/hitbox_system.dart';
 import 'package:faster/systems/jump_system.dart';
 import 'package:faster/systems/obstacle_system.dart';
+import 'package:faster/systems/particle_disposal_system.dart';
 import 'package:faster/systems/score_system.dart';
 import 'package:faster/systems/sprite_system.dart';
 import 'package:faster/utils/constants.dart';
@@ -63,6 +64,7 @@ class FasterGame extends OxygenGame with TapDetector {
       ..registerSystem(ScoreSystem(saveScore: saveScore))
       // ..registerSystem(DebugSystem())
       ..registerSystem(ParticleSystem())
+      ..registerSystem(ParticleDisposalSystem())
       ..registerComponent<ParticleComponent, Particle>(() => ParticleComponent())
       ..registerComponent<VelocityComponent, Vector2>(() => VelocityComponent())
       ..registerComponent<TapInputComponent, bool>(() => TapInputComponent())
