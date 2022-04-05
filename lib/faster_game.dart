@@ -61,7 +61,7 @@ class FasterGame extends OxygenGame with TapDetector {
       ..registerSystem(HitBoxSystem())
       ..registerSystem(CollisionSystem())
       ..registerSystem(ScoreSystem(saveScore: saveScore))
-      ..registerSystem(DebugSystem())
+      // ..registerSystem(DebugSystem())
       ..registerSystem(ParticleSystem())
       ..registerComponent<ParticleComponent, Particle>(() => ParticleComponent())
       ..registerComponent<VelocityComponent, Vector2>(() => VelocityComponent())
